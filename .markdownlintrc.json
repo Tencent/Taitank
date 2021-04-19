@@ -1,0 +1,12 @@
+{
+    "line-length": false,
+    "no-blanks-blockquote": false,
+    "single-h1": false,
+    "first-line-h1": false,
+    "no-multiple-blanks": {
+      "maximum": 2
+    },
+    "no-inline-html": {
+      "allowed_elements": [ "p", "img"]
+    }
+  }

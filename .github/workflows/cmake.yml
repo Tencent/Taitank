@@ -1,0 +1,56 @@
+name: CMake
+
+on: [push, pull_request]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Windows or Mac.  You can convert this to a matrix build if you need
+    # cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      shell: bash
+      # Execute the build.  You can specify a specific target with "--target <NAME>"
+      run: sh build.sh -s linux -a x86_64 -t debug
+
+    - name: Test
+      shell: bash
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: cd ${{github.workspace}}/tests; sh build.sh
+      if: ${{success()}}
+
+    - name: Bench
+      shell: bash
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: cd ${{github.workspace}}/benchmark; sh build.sh
+      if: ${{success()}}
+
+  commitlint:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v1
+      - uses: wagoid/commitlint-github-action@v1
+        with:
+          configFile: .commitlintrc.js
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: markdownlint
+        uses: nosborn/github-action-markdown-cli@v1.1.1
+        with:
+          config_file: .markdownlintrc.json
+          files: ./README*.md ./PUBLISH*.md
