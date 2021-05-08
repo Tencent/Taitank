@@ -57,6 +57,7 @@ div.logo-group {
     margin-bottom: 1rem;
     img {
       height: 130px;
+      max-width: none;
     }
     h3 {
       font-size: 10px;
@@ -71,8 +72,9 @@ div.logo-group {
     width: 33%;
     padding: 20px;
     margin-right: 0;
-    img{
+    img {
       height: 118px;
+      max-width: none;
     }
   }
 }
