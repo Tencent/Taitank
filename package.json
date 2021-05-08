@@ -3,7 +3,9 @@
   "description": "Taitank Layout",
   "scripts": {
     "markdownlint": "markdownlint --config .markdownlintrc.json ./*.md",
-    "commitlint": "commitlint --color"
+    "commitlint": "commitlint --color",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,22 @@
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
     "@commitlint/lint": "^12.1.1",
-    "markdownlint-cli": "^0.27.1"
+    "glob": "^7.1.6",
+    "husky": "^1.0.1",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.2",
+    "lint-staged": "^7.0.0",
+    "markdown-it-disable-url-encode": "^1.0.1",
+    "markdownlint-cli": "^0.27.1",
+    "vuepress": "^1.5.0",
+    "yamljs": "^0.3.0"
+  },
+  "dependencies": {
+    "vue": "^2.6.12",
+    "vue-server-renderer": "^2.6.12",
+    "vue-tabs-component": "^1.5.0",
+    "vuepress-plugin-element-tabs": "^0.2.8",
+    "vuepress-plugin-mermaidjs": "^1.5.1",
+    "vuepress-plugin-smooth-scroll": "^0.0.3"
   }
 }

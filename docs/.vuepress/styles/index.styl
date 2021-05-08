@@ -1,0 +1,76 @@
+pre.code-container {
+    border-left: .5rem solid;
+    border-color: #74a9ff;
+    border-radius: 0;
+    padding: 0 1.5rem;
+}
+
+pre.code-container>code code {
+    background-color: #74a9ff!important;
+    padding: 3px 5px;
+    border-radius: 3px;
+    color: #000
+}
+
+// card-container 
+div.card-container{
+  position:relative;
+  margin-right:-21px;
+}
+div.card-container::after {
+  clear: both;
+  content:" ";
+  display: block;
+  position:relative;
+}
+
+div.card-warp {
+  float: left;
+  width: 33.333%;
+  box-sizing: border-box;
+  padding: 20px 20px 10px 0;
+}
+
+@media screen and (max-width: 650px){
+  div.card-warp {
+    width: 100%;
+  }
+}
+
+div.card {
+    border-radius: 5px;
+    border: 1px solid #74a9ff;
+    padding: 0px 10px;
+}
+
+div.card .title {
+  font-weight: 700;
+}
+
+// form style
+table
+  display: table;
+  min-width: 100%;
+
+thead tr 
+  border-top none
+  border-bottom 2px solid #8e8e8e
+
+th 
+  text-align left
+
+tr
+  &:nth-child(2n)
+    background-color transparent
+
+th, td
+  border none
+  padding .5em .8em
+  min-width 50px
+
+
+// mermaid center appear
+svg[id^=mermaid_]{margin: 0 auto; display: block;padding:2em 0;max-width: 100%;}
+
+
+.minder-container > div{height:100%}

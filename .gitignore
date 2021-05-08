@@ -34,3 +34,12 @@
 # Node Modules
 node_modules
 package-lock.json
+
+# docs
+docs/.vuepress/dist/*
+docs/guide/.DS_Store
+docs/external_*
+
+*/.DS_Store
+.idea
+.DS_Store
