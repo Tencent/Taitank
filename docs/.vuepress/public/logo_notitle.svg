@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2446" height="2393" viewBox="0 0 2446 2393">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="1239.252" y1="2228.47" x2="1239.252" y2="486.656" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6864ff"/>
+      <stop offset="1" stop-color="#b060ff" stop-opacity="0.878"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="714.432" y1="1209.62" x2="975.314" y2="356.312" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00f1ff" stop-opacity="0.161"/>
+      <stop offset="1" stop-color="#585dff" stop-opacity="0.949"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="1496.711" y1="1066.22" x2="1759.724" y2="201.625" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6cfaff" stop-opacity="0.251"/>
+      <stop offset="1" stop-color="#00e4f5"/>
+    </linearGradient>
+  </defs>
+  <path id="_3" data-name="3" class="cls-1" d="M941.08,2062.03V543.6c0-37.392,28.221-62.425,63.03-55.921L1474.39,573.6c34.81,6.5,63.03,42.088,63.03,79.477V2171.51c0,37.39-28.22,62.43-63.03,55.92l-470.28-85.92C969.3,2135,941.08,2099.42,941.08,2062.03Z"/>
+  <path id="_2" data-name="2" class="cls-2" d="M1450.86,1208.19L238.926,1002.66c-48.607-9.105-88-58.851-88-111.119V435.911c0-52.267,39.4-87.263,88.005-78.163L1450.86,563.286c48.6,9.1,88,58.844,88,111.112V1130.03C1538.86,1182.29,1499.46,1217.29,1450.86,1208.19Z"/>
+  <path id="_1" data-name="1" class="cls-3" d="M2227.96,1064.78L1028.5,847.986c-49.219-9.215-89.117-59.588-89.117-112.512V282.222c0-52.924,39.9-88.358,89.117-79.146L2227.96,419.87c49.21,9.213,89.1,59.585,89.1,112.51V985.631C2317.06,1038.56,2277.17,1073.99,2227.96,1064.78Z"/>
+</svg>

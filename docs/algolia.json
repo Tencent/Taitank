@@ -1,0 +1,30 @@
+{
+  "index_name": "titank",
+  "start_urls": [{
+    "url": "https://taitank.dev/",
+    "selectors_key": "v1",
+    "tags": [
+      "v1"
+    ]
+  }, {
+    "url": "https://taitanklayout.com/",
+    "selectors_key": "v2",
+    "tags": [
+      "v2"
+    ]
+  }
+  ],
+  "selectors": {
+    "lvl0": {
+      "selector": "p.sidebar-heading.open",
+      "global": true,
+      "default_value": "Documentation"
+    },
+    "lvl1": ".content__default h1",
+    "lvl2": ".content__default h2",
+    "lvl3": ".content__default h3",
+    "lvl4": ".content__default h4",
+    "lvl5": ".content__default h5",
+    "text": ".content__default p, .content__default li"
+  }
+}
