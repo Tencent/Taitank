@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preset name="vc16win32" comment="VC16 Win32">
+  <platform targetPlatform="win32" compiler="vc16" />
+  <CMakeParameters>
+  </CMakeParameters>
+</preset>

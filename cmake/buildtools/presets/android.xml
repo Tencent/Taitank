@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preset name="android" comment="Android-19, armeabi-v7a">
+  <platform targetPlatform="android" compiler="clang" />
+  <CMakeParameters>
+    <CMakeParameter name="ANDROID_NATIVE_API_LEVEL" value="android-19" comment="Android platform API level" />
+    <CMakeParameter name="ANDROID_ABI" value="armeabi-v7a" comment="Android arm ABI" />
+  </CMakeParameters>
+</preset>

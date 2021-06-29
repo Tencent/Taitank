@@ -20,7 +20,7 @@ jobs:
     - name: Build
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: sh build.sh -s linux -a x86_64 -t debug
+      run: cd cmake; sh generate.sh linux
 
     - name: Test
       shell: bash

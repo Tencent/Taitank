@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preset name="ios64" comment="iOS Xcode">
+  <platform targetPlatform="ios64" compiler="xcode" />
+  <CMakeParameters>
+    <CMakeParameter name="IOS_PLATFORM" value="SIMULATOR64" comment="IOS PLATFORM" />
+    <CMakeParameter name="IOS_ARCH" value="x86_64" comment="IOS ARCH" />
+    <CMakeParameter name="IOS_DEPLOYMENT_TARGET" value="10.0" comment="IOS DEPLOYMENT TARGET" />
+  </CMakeParameters>
+</preset>
