@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preset name="linux" comment="Linux clang">
+  <platform targetPlatform="linux" compiler="clang" />
+  <CMakeParameters>
+    <CMakeParameter name="CMAKE_SYSTEM_NAME" value="Linux" comment="system name" />
+    <CMakeParameter name="CMAKE_SYSTEM_PROCESSOR" value="x86_64" comment="processor" />
+  </CMakeParameters>
+</preset>

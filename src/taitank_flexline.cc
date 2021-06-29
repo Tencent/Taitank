@@ -230,7 +230,7 @@ void FlexLine::AlignItems() {
     }
   }
 
-  //  see HippyTest.align_items_center_child_without_margin_bigger_than_parent in /tests folder
+  //  see TaitankTest.align_items_center_child_without_margin_bigger_than_parent in /tests folder
   //  remainingFreeSpace can be negative, < 0.
   //  if(remainingFreeSpace < 0) {
   //    remainingFreeSpace = 0;

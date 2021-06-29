@@ -8,8 +8,7 @@ add_compile_options(
 	-std=c++11
 	-Werror
 	-fno-exceptions
-	-Wno-format-truncation
-	 )
+	)
 
 file(GLOB TAITANK_SROURCE_FILES ../src/*.cc)
 message( taitank source file list: "${TAITANK_SROURCE_FILES}")

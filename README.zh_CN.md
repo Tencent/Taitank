@@ -41,11 +41,14 @@ Taitank 是一个支持 Flex 的跨平台的轻量级的 c++ 排版引擎。
 2. [Android Studio](https://developer.android.com/studio) 和 NDK: 用以编译 Android so
 3. [Xcode](https://developer.apple.com/xcode/) 和 iOS sdk: 用以编译 iOS so.
 4. [emscripten](https://emscripten.org/docs/getting_started/downloads.html): 用以编译 wasm.
+5. [Python](https://www.python.org/): 用以执行编译脚本.
 
 ### 编译出你的库
 
+切换到 cmake 目录
+
 ```bash
-build.sh [ -s system ] [ -a architecture ] [ -t debug|release ]
+cd cmake
 ```
 
 ### 支持的平台

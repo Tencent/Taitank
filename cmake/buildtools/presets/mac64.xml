@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preset name="mac64" comment="macOS Xcode">
+  <platform targetPlatform="mac64" compiler="xcode" />
+  <CMakeParameters>
+  </CMakeParameters>
+</preset>

@@ -580,7 +580,7 @@ void TaitankNode::layout(float parent_width, float parent_height, TaitankDirecti
 #endif
 
 #ifdef LAYOUT_TIME_ANALYZE
-  HPLog(LogLevelDebug, "HippyLayoutTime layout: count %d cache %d, measure: count %d cache %d",
+  HPLog(LogLevelDebug, "TaitankLayoutTime layout: count %d cache %d, measure: count %d cache %d",
         layoutCount, layoutCacheCount, measureCount, measureCacheCount);
 #endif
 }
@@ -659,7 +659,7 @@ bool TaitankNode::CollectFlexLines(std::vector<FlexLine*>& flex_lines, TaitankSi
     TaitankNodeRef item = items[i];
     if (item->style_.position_type_ == POSITION_TYPE_ABSOLUTE ||
         item->style_.display_type_ == DISPLAY_TYPE_NONE) {
-      // see HippyTest.dirty_mark_all_children_as_dirty_when_display_changes
+      // see TaitankTest.dirty_mark_all_children_as_dirty_when_display_changes
       // when display changes.
       if (i == itemsSize - 1 && line != nullptr) {
         flex_lines.push_back(line);
@@ -982,7 +982,7 @@ void TaitankNode::LayoutImpl(float parent_width, float parent_height,
   // 4. Determine the main size of the flex container using the rules of the
   // formatting context in which it participates. For this computation, auto
   // margins on flex items are treated as 0.
-  // TODO(charleeshen): if has set , what to do for next run in determineCrossAxisSize's
+  // TODO: if has set , what to do for next run in determineCrossAxisSize's
   // layoutImpl
   float containerInnerMainSize = 0.0f;
   if (isDefined(style_.dim_[kAxisDim[mainAxis]])) {
@@ -1021,7 +1021,7 @@ void TaitankNode::LayoutImpl(float parent_width, float parent_height,
     // cache layout result & state...
     CacheLayoutOrMeasureResult(availableSize, measureMode, layout_action);
     // free flexLines, allocate in collectFlexLines.
-    // TODO(charleeshen): opt.
+    // TODO: opt.
     for (size_t i = 0; i < flexLines.size(); i++) {
       delete flexLines[i];
     }
@@ -1030,22 +1030,22 @@ void TaitankNode::LayoutImpl(float parent_width, float parent_height,
 
   // 6. Resolving Flexible Lengths
   // To resolve the flexible lengths of the items within a flex line:
-  // TODO(charleeshen): //this's the only place that confirm child items main axis size, see
+  // TODO: //this's the only place that confirm child items main axis size, see
   // item->setLayoutDim
   DetermineItemsMainAxisSize(flexLines, layout_action);
 
   // 9.4. Cross Size Determination
   // calculate line's cross size in flexLines
-  // TODO(charleeshen): The real place that Determine
+  // TODO: The real place that Determine
   // the flex container's used cross size is at step 15.
 
   float sumLinesCrossSize =
       DetermineCrossAxisSize(flexLines, availableSize, layout_action, layout_context);
 
   if (!performLayout) {
-    // TODO(charleeshen): for measure, I put the calculate of flex container's cross size in
+    // TODO: for measure, I put the calculate of flex container's cross size in
     // here..
-    // TODO(charleeshen): why must in step 15 in W3 flex layout algorithm
+    // TODO: why must in step 15 in W3 flex layout algorithm
     // noted by ianwang 12.30.2017.
 
     // 15.Determine the flex container's used cross size:
@@ -1109,7 +1109,7 @@ float TaitankNode::DetermineCrossAxisSize(std::vector<FlexLine*>& flex_lines,
       // that would be stored in result.dim[crossAxis]
       // align stretch may be modify this value in the later step.
 
-      // WARNING TODO(charleeshen): this is the only place that the Recursive flex layout
+      // WARNING TODO: this is the only place that the Recursive flex layout
       // happen. 7.Determine the hypothetical cross size of each item by
       // performing layout with the used main size and the available space,
       // treating auto as fit-content.
@@ -1127,11 +1127,11 @@ float TaitankNode::DetermineCrossAxisSize(std::vector<FlexLine*>& flex_lines,
       item->style_.set_dim(mainAxis, oldMainDim);
       layout_action = oldLayoutAction;
       // if child item had overflow , then transfer this state to its parent.
-      // see HippyTest_HadOverflowTests.spacing_overflow_in_nested_nodes in
+      // see TaitankTest_HadOverflowTests.spacing_overflow_in_nested_nodes in
       // ./tests/HPHadOverflowTest.cpp
       layout_result_.had_overflow = layout_result_.had_overflow | item->layout_result_.had_overflow;
 
-      // TODO(charleeshen): if need support baseline  add here
+      // TODO: if need support baseline add here
       // 8.Calculate the cross size of each flex line.
       // 1)Collect all the flex items whose inline-axis is parallel to the
       // main-axis, whose align-self is baseline, and whose cross-axis margins
@@ -1219,7 +1219,7 @@ float TaitankNode::DetermineCrossAxisSize(std::vector<FlexLine*>& flex_lines,
     }
   }
 
-  // TODO(charleeshen): Why Determine  the flex container's used cross size in step 15.
+  // TODO: Why Determine  the flex container's used cross size in step 15.
   return sumLinesCrossSize;
 }
 
@@ -1248,7 +1248,7 @@ void TaitankNode::DetermineItemsMainAxisSize(std::vector<FlexLine*>& flexLines,
 
 // 9.5 Main-Axis Alignment
 void TaitankNode::MainAxisAlignment(std::vector<FlexLine*>& flexLines) {
-  // TODO(charleeshen): RTL::
+  // TODO: RTL::
   // 12. Distribute any remaining free space. For each flex line:
   FlexDirection mainAxis = style_.flex_direction_;
   float mainAxisContentSize = get_layout_dim(mainAxis) - get_padding_and_border(mainAxis);
@@ -1314,7 +1314,7 @@ void TaitankNode::CrossAxisAlignment(std::vector<FlexLine*>& flexLines) {
         case FLEX_ALIGN_END:
           offset += remainingFreeSpace;
           break;
-          // TODO(charleeshen): case baseline alignment
+          // TODO: case baseline alignment
         default:
           break;
       }

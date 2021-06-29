@@ -40,11 +40,14 @@ Taitank is now applied in 27 [Tencent](http://www.tencent.com/) apps such as Mob
 2. [Android Studio](https://developer.android.com/studio) with NDK: build Android so.
 3. [Xcode](https://developer.apple.com/xcode/) with iOS sdk: build iOS so.
 4. [emscripten](https://emscripten.org/docs/getting_started/downloads.html): build wasm.
+5. [Python](https://www.python.org/): script to build taitank layout.
 
 ### Build your first libiary
 
+Change directory to cmake to build your project.
+
 ```bash
-build.sh [ -s system ] [ -a architecture ] [ -t debug|release ]
+cd cmake
 ```
 
 ### Support Platforms

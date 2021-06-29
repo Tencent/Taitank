@@ -47,7 +47,7 @@ void TaitankLog(LogLevel level, const char *format, ...) {
     default:
       break;
   }
-  __android_log_vprint(androidLevel, "HippyLayout", format, args);
+  __android_log_vprint(androidLevel, "TaitankLayout", format, args);
   va_end(args);
 }
 #else
