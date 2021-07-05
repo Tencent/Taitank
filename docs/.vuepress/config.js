@@ -17,7 +17,7 @@ module.exports = {
             md.use(require("markdown-it-disable-url-encode"));
         }
     },
-    base: "/",
+    base: "/Taitank/",
     dest: "./docs/.vuepress/dist",
     themeConfig: {
         logo: "/logo_notitle.svg",
