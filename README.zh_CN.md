@@ -10,7 +10,7 @@
 
 Taitank 是一个支持 Flex 的跨平台的轻量级的 C++ 排版引擎。
 
-到目前为止，[腾讯](http://www.tencent.com/)内已经有了27款流行 App 业务中接入了 Taitank 排版引擎，包括手机QQ、手机QQ浏览器、腾讯视频App，QQ音乐等，每日触达数亿用户。
+到目前为止，[腾讯](http://www.tencent.com/)内已经有了27款流行 App 在业务中接入了 Taitank 排版引擎，包括手机QQ、手机QQ浏览器、腾讯视频，QQ音乐等，每日触达数亿用户。
 
 ## 特征
 
