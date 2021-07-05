@@ -1,8 +1,8 @@
 # Taitank Cross Platform Layout
 
-![Taitank Group](https://img.shields.io/badge/group-Taitank-blue.svg) [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://github.com/ilikethese/Taitank/blob/main/License) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/ilikethese/Taitank/pulls) ![node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg) [![Actions Status](https://github.com/ilikethese/Taitank/workflows/CMake/badge.svg?branch=main)](https://github.com/ilikethese/Taitank/actions) [![Codecov](https://img.shields.io/codecov/c/github/ilikethese/Taitank)](https://codecov.io/gh/ilikethese/Taitank)
+![Taitank Group](https://img.shields.io/badge/group-Taitank-blue.svg) [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://github.com/Tencent/Taitank/blob/main/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Tencent/Taitank/pulls) ![node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg) [![Actions Status](https://github.com/Tencent/Taitank/workflows/CMake/badge.svg?branch=main)](https://github.com/Tencent/Taitank/actions) [![Codecov](https://img.shields.io/codecov/c/github/Tencent/Taitank)](https://codecov.io/gh/Tencent/Taitank)
 
-[English](./README.md) | 简体中文 | [Homepage](//tencent.github.io/ilikethese/)
+[English](./README.md) | 简体中文 | [Homepage](//tencent.github.io/Taitank/)
 
 ## 介绍
 

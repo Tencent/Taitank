@@ -2,26 +2,24 @@
 
 ## Absolute/Relative Layout
 
-The `position type` of an element defines how it is positioned within its parent.
-The position values top, right, bottom, and left behave differently depending on the position type of the element. For a relative element they offset the position of the element in the direction specified. For absolute element though these properties specify the offset of the element's side from the same side on the parent.
+The `position type` of an element defines how an element is positioned in the document.
+The top, right, bottom and left properties determine the final location of the position depending on the position type of the element.
 
-#### RELATIVE (DEFAULT)
+#### RELATIVE
 
-  By default an element is positioned relatively. This means an element is positioned according to the normal flow of the layout, and then offset relative to that position based on the values of `top`, `right`, `bottom`, and `left`. The offset does not affect the position of any sibling or parent elements.
+  An element is positioned relatively. This means an element is positioned according to the normal flow of layout, and the relative position based on the properties of `top`, `right`, `bottom` and `left`.  
 
 #### ABSOLUTE
 
-  When positioned absolutely an element doesn't take part in the normal layout flow. It is instead laid out independent of its siblings. The position is determined based on the `top`, `right`, `bottom`, and `left` values.
-
+  An element is positioned absolutely. This means an element dosen't take part in the normal layout flow. The position is determined based on the `top`, `right`, `bottom` and `left` values.
 
 ## Align Content
 
-Align content defines the distribution of lines along the cross-axis. This only has effect when items are wrapped to multiple lines using `flex wrap`.
+Align content defines the distribution space of lines along the cross-axis. This only take effect under condition when items are wrapped to multiple lines using `flex wrap`. 
 
 #### FLEX START (DEFAULT)
 
   Align wrapped lines to the start of the container's cross axis.
-
 #### FLEX END 
 
   Align wrapped lines to the end of the container's cross axis.
@@ -40,12 +38,11 @@ Align content defines the distribution of lines along the cross-axis. This only 
 
 #### SPACE AROUND 
 
-  Evenly space wrapped lines across the container's main axis, distributing remaining space around the lines. Compared to space between using space around will result in space being distributed to the begining of the first lines and end of the last line.
+  Evenly space wrapped lines across the container's main axis, distributing remaining space around the lines. 
 
 ## Align Items
 
-Align items describes how to align children along the cross axis of their container. Align items is very similar to `justify content` but instead of applying to the main axis, `align items` applies to the cross axis.
-
+Align items defines the distribution space of the cross-aixs for all items.
 #### STRETCH (DEFAULT) 
   
   Stretch children of a container to match the height of the container's cross axis.
@@ -68,71 +65,58 @@ Align items describes how to align children along the cross axis of their contai
 
 ## Align Self
 
-Align self has the same options and effect as `align items` but instead of affecting the children within a container, you can apply this property to a single child to change its alignment within its parent. `align self` overrides any option set by the parent with `align items`.
-
-## Aspect Ratio
-
-AspectRatio is a property introduced by Titank and is not present as a settable property in the css flexbox specification. Flexbox does has the notion of aspect ratio though for things with intrinsic aspect ratio such as images.
-
-The `aspect ratio` property in Titank has the following properties:
-
-+ Accepts any floating point value > 0, the default is undefined.
-+ Defined as the ratio between the `width` and the `height` of a node e.g. if a node has an aspect ratio of 2 then its `width` is twice the size of its `height`.
-+ Respects the `min` and `max` dimensions of an item.
-+ Has higher priority than `flex grow`.
-+ If `aspect ratio`, `width`, and `height` are set then the cross axis dimension is overridden.
-
+Align self defines the distribution space on the cross-axis for it self. `align self` overrrides any options set by the parent with `align items`.
 
 ## Flex Direction
 
-Flex direction controls the direction in which children of a node are laid out. This is also referred to as the main axis. The main axis is the direction in which children are laid out. The cross axis the the axis perpendicular to the main axis, or the axis which wrapping lines are laid out in.
+Flex direction defines how flex items are laid out in an flex container.
 
 #### ROW (DEFAULT) 
 
-Align children from left to right. If `wrapping` is enabled then the next line will start under the first item on the left of the container.
-
+Align children from left to right.
 #### COLUMN 
 
-Align children from top to bottom. If `wrapping` is enabled then the next line will start to the left first item on the top of the container.
-
+Align children from top to bottom. 
 #### ROW REVERSE 
 
-Align children from right to left. If `wrapping` is enabled then the next line will start under the first item on the right of the container.
+Align children from right to left. 
 
 #### COLUMN REVERSE 
 
-Align children from bottom to top. If `wrapping` is enabled then the next line will start to the left first item on the bottom of the container.
+Align children from bottom to top. 
 
 ## Flex Wrap
 
-The flex wrap property is set on containers and controls what happens when children overflow the size of the container along the main axis. By default children are forced into a single line (which can shrink elements).
+Flex wrap defines weather flex itmes can be laid out onto one line or can be wrap onto multiple lines.
 
-If wrapping is allowed items are wrapped into multiple lines along the main axis if needed. wrap reverse behaves the same, but the order of the lines is reversed.
+#### No Wrap 
 
-When wrapping lines align content can be used to specify how the lines are placed in the container.
+Flex item should be laid out onto one line.
+
+#### Wrap 
+
+Flex item can be laid out onto multiple lines.
+
+#### Wrap Reverse
+
+The same as wrap but cross-start and cross-end are premuted. 
 
 ## Flex Basis, Grow, and Shrink
 
 #### FLEX GROW 
 
-It describes how any space within a container should be distributed among its children along the main axis. After laying out its children, a container will distribute any remaining space according to the flex grow values specified by its children.
-
-Flex grow accepts any floating point value >= 0, with 0 being the default value. A container will distribute any remaining space among its children weighted by the child’s flex grow value.
-
+The flex-grow defines the flex grow factor of a flex item.
 #### FLEX SHRINK 
 
-It describes how to shrink children along the main axis in the case that the total size of the children overflow the size of the container on the main axis. flex shrink is very similar to flex grow and can be thought of in the same way if any overflowing size is considered to be negative remaining space. These two properties also work well together by allowing children to grow and shrink as needed.
-
-Flex shrink accepts any floating point value >= 0, with 1 being the default value. A container will shrink its children weighted by the child’s flex shrink value.
-
+The flex-shrink defines the flex shrink factor of a flex item.
 
 #### FLEX BASIS 
 
-It is an axis-independent way of providing the default size of an item along the main axis. Setting the flex basis of a child is similar to setting the `width` of that child if its parent is a container with `flex direction: row` or setting the `height` of a child if its parent is a container with `flex direction: column`. The flex basis of an item is the default size of that item, the size of the item before any flex grow and flex shrink calculations are performed.
+The flex-basis defines the initial main size of a flex item.
 
 ## Justify Content
 
-Justify content describes how to align children within the main axis of their container. For example, you can use this property to center a child horizontally within a container with `flex direction` set to `row` or vertically within a container with `flex direction` set to `column`.
+Justify Content defines the distribution space on the main-axis.
 
 #### FLEX START (DEFAULT) 
 
@@ -158,35 +142,33 @@ Evenly space of children across the container's main axis, distributing remainin
 
 Evenly distributed within the alignment container along the main axis. The spacing between each pair of adjacent items, the main-start edge and the first item, and the main-end edge and the last item, are all exactly the same.
 
-## Layout Direction
+## Direction
 
-Layout direction specifies the direction in which children and text in a hierarchy should be laid out. Layout direction also effects what edge `start` and end refer to. By default Titank lays out with `LTR` layout direction. In this mode `start` refers to `left` and `end` refers to `right`. When localizing your apps for markets with RTL languages you should customize this by either by passing a direction to the `CalculateLayout` call or by setting the direction on the root node.
+Direction specifies the direction in which children and text should be laid out.
 
 #### LTR (DEFAULT) 
 
-Text and children and laid out from left to right. Margin and padding applied the start of an element are applied on the left side.
+Text and children and laid out from left to right.
 
 #### RTL 
 
-Text and children and laid out from right to left. Margin and padding applied the start of an element are applied on the right side.
-
+Text and children and laid out from right to left. 
 ## Margins, Paddings, and Borders
 
 #### MARGIN
 
-It effects the spacing around the outside of a node. A node with margin will offset itself from the bounds of its parent but also offset the location of any siblings. The margin of a node contributes to the total size of its parent if the parent is auto sized.
+It effects the spacing around a node's border.
 
 #### PADDING 
 
-It affects the size of the node it is applied to. Padding in Titank acts as if box-sizing: border-box; was set. That is padding will not add to the total size of an element if it has an explicit size set. For auto sized nodes padding will increase the size of the node as well as offset the location of any children.
+It affects the spacing between a node's border and the node's content.
 
 #### BORDER
 
-In Titank it acts exactly like padding and only exists as a seperate property so that higher level frameworks get a hint as to how thick to draw a border. Titank however does not do any drawing so just uses this information during layout where border acts exactly like padding.
-
+It affects the node's border space.
 ## Max / Min Width and Height
 
-All the following properties set the maximum and minimum size constraints of an element. These properties have higher priority than all other properties and will always be respected. Constraints can be specified as either absolute pixel values or as percentages of their parent's size. By default all these constraints are `undefined`.
+All the following properties set the maximum and minimum size constraints of an element.
 
 ## Width and Height
 
@@ -197,8 +179,6 @@ Both `width` and `height` can take following values:
 **AUTO** Is the default Value, Titank calculates the width/height for the element based on its content, whether that is other children, text, or an image.
 
 **PIXELS** Defines the width/height in absolute pixels. Depending on other properties set on the Titank node this may or may not be the final dimension of the node.
-
-**PERCENTAGE** Defines the width or height in percentage of its parent's width or height respectively.
 
 [comment]: <> (```bash)
 

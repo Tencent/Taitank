@@ -44,7 +44,7 @@ module.exports = {
                 }
             ]
         },
-        repo: "https://github.com/ilikethese/Taitank",
+        repo: "https://github.com/Tencent/Taitank",
         repoLabel: "GitHub"
     },
     plugins: [
