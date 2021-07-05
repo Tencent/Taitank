@@ -1,8 +1,8 @@
 # Taitank Cross Platform Layout
 
-![Taitank Group](https://img.shields.io/badge/group-Taitank-blue.svg) [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://github.com/ilikethese/Taitank/blob/main/License) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/ilikethese/Taitank/pulls) ![node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg) [![Actions Status](https://github.com/ilikethese/Taitank/workflows/CMake/badge.svg?branch=main)](https://github.com/ilikethese/Taitank/actions) [![Codecov](https://img.shields.io/codecov/c/github/ilikethese/Taitank)](https://codecov.io/gh/ilikethese/Taitank)
+![Taitank Group](https://img.shields.io/badge/group-Taitank-blue.svg) [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://github.com/Tencent/Taitank/blob/main/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Tencent/Taitank/pulls) ![node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg) [![Actions Status](https://github.com/Tencent/Taitank/workflows/CMake/badge.svg?branch=main)](https://github.com/Tencent/Taitank/actions) [![Codecov](https://img.shields.io/codecov/c/github/Tencent/Taitank)](https://codecov.io/gh/Tencent/Taitank)
 
-English | [简体中文](./README.zh_CN.md) | [Homepage](//tencent.github.io/ilikethese/)
+English | [简体中文](./README.zh_CN.md) | [Homepage](//tencent.github.io/Taitank/)
 
 ## Introduction
 
@@ -15,19 +15,19 @@ Taitank is now applied in 27 [Tencent](http://www.tencent.com/) apps such as Mob
 ## Advantages
 
 * Fully supported Flex
-* Fast Layout and Low memory consumpation
+* Fast Layout and Low memory consumption
 * Multi platform support
 
 ## Project structure
 
 ```text
-├── CMakeLists.txt                    # complier script.
+├── CMakeLists.txt                    # compiler script.
 ├── assets                            # assets.
 ├── benchmark                         # benchmark.
-├── examples                          # taitank layout examples.
+├── examples                          # Taitank layout examples.
 ├── javascript                        # wasm layout source code.
-├── src                               # taitank layout source code.
-├── tests                             # taitank layout test.
+├── src                               # Taitank layout source code.
+├── tests                             # Taitank layout test.
 └── toolchain                         # toolchain.
 ```
 
@@ -36,11 +36,11 @@ Taitank is now applied in 27 [Tencent](http://www.tencent.com/) apps such as Mob
 ### Preparing environment
 
 
-1. [CMake](https://cmake.org/) : build taitank layout.
+1. [CMake](https://cmake.org/) : build Taitank layout.
 2. [Android Studio](https://developer.android.com/studio) with NDK: build Android so.
 3. [Xcode](https://developer.apple.com/xcode/) with iOS sdk: build iOS so.
 4. [emscripten](https://emscripten.org/docs/getting_started/downloads.html): build wasm.
-5. [Python](https://www.python.org/): script to build taitank layout.
+5. [Python](https://www.python.org/): script to build Taitank layout.
 
 ### Build your first libiary
 

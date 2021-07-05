@@ -5,11 +5,12 @@
     "markdownlint": "markdownlint --config .markdownlintrc.json ./*.md",
     "commitlint": "commitlint --color",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "docs:delpoy": "./deploy.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ilikethese/Taitank.git"
+    "url": "git+https://github.com/Tencent/Taitank.git"
   },
   "keywords": [
     "Taitank",
@@ -19,9 +20,9 @@
   "author": "Taitank Team",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/ilikethese/Taitank/issues"
+    "url": "https://github.com/Tencent/Taitank/issues"
   },
-  "homepage": "https://github.com/ilikethese/Taitank#readme",
+  "homepage": "https://github.com/Tencent/Taitank#readme",
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
