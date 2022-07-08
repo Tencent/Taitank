@@ -8,11 +8,11 @@ actionLink: /documentation/overview.md
 sidebar: false
 features:
 - title: PERFORMANCE
-  details: Titank was built to be fast and performance will always be one of Titank's primary goals. For a layout engine to be able to power any range of applications, it needs to be fast and never stand in the way of a fluid user experience.
+  details: Taitank was built to be fast and performance will always be one of Taitank's primary goals. For a layout engine to be able to power any range of applications, it needs to be fast and never stand in the way of a fluid user experience.
 - title: CROSS PLATFORM
-  details: Titank is built with cross platform in mind. To ensure Titank can be used anywhere, it was written in portable C/C++ and has a low number of dependencies and small binary size. This means Titank can be used on iOS and Android, sharing knowledge, and potentially code, between platforms.
+  details: Taitank is built with cross platform in mind. To ensure Taitank can be used anywhere, it was written in portable C/C++ and has a low number of dependencies and small binary size. This means Taitank can be used on iOS and Android, sharing knowledge, and potentially code, between platforms.
 - title: EASY TO LEARN
-  details: Titank is easy to pick up and learn. The interactive documentation pages and a fully fledged layout editor makes it easy to play and learn all the features. If used with any of the major UI frameworks the layout editor even provides code generation.
+  details: Taitank is easy to pick up and learn. The interactive documentation pages and a fully fledged layout editor makes it easy to play and learn all the features. If used with any of the major UI frameworks the layout editor even provides code generation.
 footer: Apache Licensed | Copyright © 2021-present Tencent
 ---
 

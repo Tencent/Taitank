@@ -1,8 +1,8 @@
 const auto = require("./config-auto");
 
 module.exports = {
-    title: "Titank Engine",
-    description: "Tencent Titank Layout Engine",
+    title: "Taitank Engine",
+    description: "Tencent Taitank Layout Engine",
     head: [
         ['link', { rel: 'icon', href: '/favicon.ico' }]
     ],
@@ -29,7 +29,7 @@ module.exports = {
         sidebar: {
             "/": [
                 {
-                    title: "Why Titank",
+                    title: "Why Taitank",
                     path: "/"
                 },
                 {
@@ -48,7 +48,6 @@ module.exports = {
         repoLabel: "GitHub"
     },
     plugins: [
-        ["vuepress-plugin-element-tabs"],
         ['vuepress-plugin-smooth-scroll'],
         [
             "container",

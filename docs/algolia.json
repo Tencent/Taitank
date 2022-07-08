@@ -1,5 +1,5 @@
 {
-  "index_name": "titank",
+  "index_name": "taitank",
   "start_urls": [{
     "url": "https://taitank.dev/",
     "selectors_key": "v1",

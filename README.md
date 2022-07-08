@@ -42,7 +42,7 @@ Taitank is now applied in 27 [Tencent](http://www.tencent.com/) apps such as Mob
 4. [emscripten](https://emscripten.org/docs/getting_started/downloads.html): build wasm.
 5. [Python](https://www.python.org/): script to build Taitank layout.
 
-### Build your first libiary
+### Build your first library
 
 Change directory to cmake to build your project.
 

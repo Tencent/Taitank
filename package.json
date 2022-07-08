@@ -41,7 +41,6 @@
     "vue": "^2.6.12",
     "vue-server-renderer": "^2.6.12",
     "vue-tabs-component": "^1.5.0",
-    "vuepress-plugin-element-tabs": "^0.2.8",
     "vuepress-plugin-mermaidjs": "^1.5.1",
     "vuepress-plugin-smooth-scroll": "^0.0.3"
   }
