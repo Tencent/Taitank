@@ -24,20 +24,20 @@
 using namespace taitank;
 
 TEST(TAITANK_TEST, recalculate_resolvedDimonsion_onchange) {
-  const TaitankNodeRef root = TaitankNodeCreate();
+  const TaitankNodeRef root = NodeCreate();
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_min_height(root_child0, 10);
-  set_taitank_node_style_max_height(root_child0, 10);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetMinHeight(root_child0, 10);
+  SetMaxHeight(root_child0, 10);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_height(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(10, GetHeight(root_child0));
 
-  set_taitank_node_style_min_height(root_child0, VALUE_UNDEFINED);
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  SetMinHeight(root_child0, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_height(root_child0));
+  ASSERT_FLOAT_EQ(0, GetHeight(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }

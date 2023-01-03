@@ -1,14 +1,14 @@
 /*
  *
- * Tencent is pleased to support the open source community by making Taitank available. 
+ * Tencent is pleased to support the open source community by making Taitank available.
  * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http:// www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed in writing, software
  * distributed under the License is distributed on an “AS IS” BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef TAITANK_TAITANK_FLEX_H_
-#define TAITANK_TAITANK_FLEX_H_
+#pragma once
 
 namespace taitank {
 
@@ -137,23 +136,20 @@ struct TaitankSizeMode {
 };
 
 // following arrays mapping with axis's direction
-const CSSDirection kAxisStart[4] = {CSS_LEFT, CSS_RIGHT, CSS_TOP, CSS_BOTTOM};
-const CSSDirection kAxisEnd[4] = {CSS_RIGHT, CSS_LEFT, CSS_BOTTOM, CSS_TOP};
-const Dimension kAxisDim[4] = {DIMENSION_WIDTH, DIMENSION_WIDTH, DIMENSION_HEIGHT,
-                               DIMENSION_HEIGHT};
+extern const CSSDirection kAxisStart[4];
+extern const CSSDirection kAxisEnd[4];
+extern const Dimension kAxisDim[4];
 
-bool inline is_row_direction(FlexDirection dir) {
+bool inline IsRowDirection(FlexDirection dir) {
   return dir == FLEX_DIRECTION_ROW || dir == FLEX_DIRECTION_ROW_REVERSE;
 }
 
-bool inline is_column_direction(FlexDirection dir) {
+bool inline IsColumnDirection(FlexDirection dir) {
   return dir == FLEX_DIRECTION_COLUMN || dir == FLEX_DIRECTION_COLUNM_REVERSE;
 }
 
-bool inline is_reverse_direction(FlexDirection dir) {
+bool inline IsReverseDirection(FlexDirection dir) {
   return dir == FLEX_DIRECTION_COLUNM_REVERSE || dir == FLEX_DIRECTION_ROW_REVERSE;
 }
 
 }  // namespace taitank
-
-#endif  // TAITANK_TAITANK_FLEX_H_

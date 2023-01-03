@@ -1,14 +1,14 @@
 /*
  *
- * Tencent is pleased to support the open source community by making Taitank available. 
+ * Tencent is pleased to support the open source community by making Taitank available.
  * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http:// www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed in writing, software
  * distributed under the License is distributed on an “AS IS” BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -148,7 +148,7 @@ MeasureResult* TaitankLayoutCache::UseLayoutCacheIfPossible(TaitankSize availabl
     return nullptr;
   }
 
-  if (TaitankSizeIsEqual(cached_layout_.available_size, available_size) &&
+  if (SizeIsEqual(cached_layout_.available_size, available_size) &&
       cached_layout_.width_measure_mode == measure_mode.width_measure_mode &&
       cached_layout_.height_measure_mode == measure_mode.height_measure_mode) {
 #ifdef __DEBUG__
@@ -160,10 +160,10 @@ MeasureResult* TaitankLayoutCache::UseLayoutCacheIfPossible(TaitankSize availabl
   return nullptr;
 }
 
-MeasureResult* TaitankLayoutCache::get_cached_measure_result(TaitankSize available_size,
-                                                             TaitankSizeMode measure_mode,
-                                                             FlexLayoutAction layout_action,
-                                                             bool is_measure_node) {
+MeasureResult* TaitankLayoutCache::GetCachedMeasureResult(TaitankSize available_size,
+                                                          TaitankSizeMode measure_mode,
+                                                          FlexLayoutAction layout_action,
+                                                          bool is_measure_node) {
   if (is_measure_node) {
     MeasureResult* result = UseLayoutCacheIfPossible(available_size, measure_mode);
     if (result != nullptr) {
@@ -179,7 +179,7 @@ MeasureResult* TaitankLayoutCache::get_cached_measure_result(TaitankSize availab
   return nullptr;
 }
 
-MeasureResult* TaitankLayoutCache::get_cached_layout() { return &cached_layout_; }
+MeasureResult* TaitankLayoutCache::GetCachedLayout() { return &cached_layout_; }
 
 void TaitankLayoutCache::InitCache() {
   cached_layout_.available_size = {VALUE_UNDEFINED, VALUE_UNDEFINED};

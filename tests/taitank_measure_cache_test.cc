@@ -25,7 +25,7 @@ using namespace taitank;
 
 static TaitankSize _measureMax(TaitankNodeRef node, float width, MeasureMode widthMode,
                                float height, MeasureMode heightMode, void *layoutContext) {
-  int *measureCount = reinterpret_cast<int *>(node->get_context());
+  int *measureCount = reinterpret_cast<int *>(node->GetContext());
   (*measureCount)++;
 
   return TaitankSize{
@@ -36,7 +36,7 @@ static TaitankSize _measureMax(TaitankNodeRef node, float width, MeasureMode wid
 
 static TaitankSize _measureMin(TaitankNodeRef node, float width, MeasureMode widthMode,
                                float height, MeasureMode heightMode, void *layoutContext) {
-  int *measureCount = reinterpret_cast<int *>(node->get_context());
+  int *measureCount = reinterpret_cast<int *>(node->GetContext());
   *measureCount = *measureCount + 1;
   return TaitankSize{
       .width =
@@ -52,7 +52,7 @@ static TaitankSize _measureMin(TaitankNodeRef node, float width, MeasureMode wid
 
 static TaitankSize _measure_84_49(TaitankNodeRef node, float width, MeasureMode widthMode,
                                   float height, MeasureMode heightMode, void *layoutContext) {
-  int *measureCount = reinterpret_cast<int *>(node->get_context());
+  int *measureCount = reinterpret_cast<int *>(node->GetContext());
   if (measureCount) {
     (*measureCount)++;
   }
@@ -64,122 +64,122 @@ static TaitankSize _measure_84_49(TaitankNodeRef node, float width, MeasureMode 
 }
 
 TEST(TAITANK_TEST, measure_once_single_flexible_child) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
+  const TaitankNodeRef root_child0 = NodeCreate();
   int measureCount = 0;
-  root_child0->set_context(&measureCount);
+  root_child0->SetContext(&measureCount);
   root_child0->measure_ = (_measureMax);
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  SetFlexGrow(root_child0, 1);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, measureCount);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, remeasure_with_same_exact_width_larger_than_needed_height) {
-  const TaitankNodeRef root = TaitankNodeCreate();
+  const TaitankNodeRef root = NodeCreate();
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
+  const TaitankNodeRef root_child0 = NodeCreate();
   int measureCount = 0;
-  root_child0->set_context(&measureCount);
+  root_child0->SetContext(&measureCount);
   root_child0->measure_ = (_measureMin);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, 100, 100);
-  TaitankNodeDoLayout(root, 100, 50);
+  DoLayout(root, 100, 100);
+  DoLayout(root, 100, 50);
 
   ASSERT_EQ(1, measureCount);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, remeasure_with_same_atmost_width_larger_than_needed_height) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
+  const TaitankNodeRef root_child0 = NodeCreate();
   int measureCount = 0;
-  root_child0->set_context(&measureCount);
+  root_child0->SetContext(&measureCount);
   root_child0->measure_ = (_measureMin);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, 100, 100);
-  TaitankNodeDoLayout(root, 100, 50);
+  DoLayout(root, 100, 100);
+  DoLayout(root, 100, 50);
 
   ASSERT_EQ(1, measureCount);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, remeasure_with_computed_width_larger_than_needed_height) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
+  const TaitankNodeRef root_child0 = NodeCreate();
   int measureCount = 0;
-  root_child0->set_context(&measureCount);
+  root_child0->SetContext(&measureCount);
   root_child0->measure_ = (_measureMin);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, 100, 100);
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_STRETCH);
-  TaitankNodeDoLayout(root, 10, 50);
+  DoLayout(root, 100, 100);
+  SetAlignItems(root, FLEX_ALIGN_STRETCH);
+  DoLayout(root, 10, 50);
 
   ASSERT_EQ(1, measureCount);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, remeasure_with_atmost_computed_width_undefined_height) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
+  const TaitankNodeRef root_child0 = NodeCreate();
   int measureCount = 0;
-  root_child0->set_context(&measureCount);
+  root_child0->SetContext(&measureCount);
   root_child0->measure_ = (_measureMin);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, 100, VALUE_UNDEFINED);
-  TaitankNodeDoLayout(root, 10, VALUE_UNDEFINED);
+  DoLayout(root, 100, VALUE_UNDEFINED);
+  DoLayout(root, 10, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, measureCount);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, remeasure_with_already_measured_value_smaller_but_still_float_equal) {
   int measureCount = 0;
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_width(root, 288.f);
-  set_taitank_node_style_height(root, 288.f);
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
+  const TaitankNodeRef root = NodeCreate();
+  SetWidth(root, 288.f);
+  SetHeight(root, 288.f);
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_padding(root_child0, CSS_LEFT, 2.88f);
-  set_taitank_node_style_padding(root_child0, CSS_TOP, 2.88f);
-  set_taitank_node_style_padding(root_child0, CSS_RIGHT, 2.88f);
-  set_taitank_node_style_padding(root_child0, CSS_BOTTOM, 2.88f);
-  set_taitank_node_style_flex_direction(root_child0, FLEX_DIRECTION_ROW);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetPadding(root_child0, CSS_LEFT, 2.88f);
+  SetPadding(root_child0, CSS_TOP, 2.88f);
+  SetPadding(root_child0, CSS_RIGHT, 2.88f);
+  SetPadding(root_child0, CSS_BOTTOM, 2.88f);
+  SetFlexDirection(root_child0, FLEX_DIRECTION_ROW);
+  InsertChild(root, root_child0, 0);
 
-  const TaitankNodeRef root_child0_child0 = TaitankNodeCreate();
-  root_child0_child0->set_context(&measureCount);
+  const TaitankNodeRef root_child0_child0 = NodeCreate();
+  root_child0_child0->SetContext(&measureCount);
   root_child0_child0->measure_ = _measure_84_49;
-  TaitankNodeInsertChild(root_child0, root_child0_child0, 0);
+  InsertChild(root_child0, root_child0_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 
   ASSERT_EQ(1, measureCount);
 }

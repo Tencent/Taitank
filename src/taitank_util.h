@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef TAITANK_TAITANK_UTIL_H_
-#define TAITANK_TAITANK_UTIL_H_
+#pragma once
 
 #include <assert.h>
 #include <math.h>
@@ -62,10 +61,8 @@ void TaitankLog(LogLevel level, const char *format, ...);
 
 bool FloatIsEqual(const float a, const float b);
 bool FloatIsEqualInScale(const float a, const float b, const float scale);
-bool TaitankSizeIsEqual(const TaitankSize a, const TaitankSize b);
-bool TaitankSizeIsEqualInScale(const TaitankSize a, const TaitankSize b, const float scale);
-float TaitankRoundValueToPixelGrid(float value, const bool forceCeil, const bool forceFloor);
+bool SizeIsEqual(const TaitankSize a, const TaitankSize b);
+bool SizeIsEqualInScale(const TaitankSize a, const TaitankSize b, const float scale);
+float RoundValueToPixelGrid(double value, double scaleValue, const bool forceCeil, const bool forceFloor);
 
 }  // namespace taitank
-
-#endif  // TAITANK_TAITANK_UTIL_H_

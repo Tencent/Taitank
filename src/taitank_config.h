@@ -1,14 +1,14 @@
 /*
  *
- * Tencent is pleased to support the open source community by making Taitank available. 
+ * Tencent is pleased to support the open source community by making Taitank available.
  * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http:// www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed in writing, software
  * distributed under the License is distributed on an “AS IS” BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,27 +17,18 @@
  *
  */
 
-#include "taitank.h"
+#pragma once
 
-#include "gtest.h"
+namespace taitank {
 
-using namespace taitank;
+class TaitankConfig {
+ public:
+  void SetScaleFactor(float scale_factor);
+  float GetScaleFactor() const;
 
-TEST(TAITANK_TEST, computed_layout_margin) {
-  const TaitankNodeRef root = NodeCreate();
-  SetWidth(root, 100);
-  SetHeight(root, 100);
-  SetMargin(root, CSS_START, 10);
+ private:
+  float scale_factor_ = 1.0f;
+};
 
-  DoLayout(root, 100, 100);
-
-  ASSERT_FLOAT_EQ(10, GetMargin(root, CSS_LEFT));
-  ASSERT_FLOAT_EQ(0, GetMargin(root, CSS_RIGHT));
-
-  DoLayout(root, 100, 100, DIRECTION_RTL);
-
-  ASSERT_FLOAT_EQ(0, GetMargin(root, CSS_LEFT));
-  ASSERT_FLOAT_EQ(10, GetMargin(root, CSS_RIGHT));
-
-  NodeFreeRecursive(root);
-}
+typedef TaitankConfig *TaitankConfigRef;
+}  // namespace taitank

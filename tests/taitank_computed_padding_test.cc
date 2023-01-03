@@ -24,20 +24,20 @@
 using namespace taitank;
 
 TEST(TAITANK_TEST, computed_layout_padding) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
-  set_taitank_node_style_padding(root, CSS_START, 10);
+  const TaitankNodeRef root = NodeCreate();
+  SetWidth(root, 100);
+  SetHeight(root, 100);
+  SetPadding(root, CSS_START, 10);
 
-  TaitankNodeDoLayout(root, 100, 100);
+  DoLayout(root, 100, 100);
 
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_padding(root, CSS_LEFT));
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_padding(root, CSS_RIGHT));
+  ASSERT_FLOAT_EQ(10, GetPadding(root, CSS_LEFT));
+  ASSERT_FLOAT_EQ(0, GetPadding(root, CSS_RIGHT));
 
-  TaitankNodeDoLayout(root, 100, 100, DIRECTION_RTL);
+  DoLayout(root, 100, 100, DIRECTION_RTL);
 
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_padding(root, CSS_LEFT));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_padding(root, CSS_RIGHT));
+  ASSERT_FLOAT_EQ(0, GetPadding(root, CSS_LEFT));
+  ASSERT_FLOAT_EQ(10, GetPadding(root, CSS_RIGHT));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }

@@ -27,114 +27,114 @@ using namespace ::testing;
 class TAITANK_TEST_HAD_OVERFLOW : public Test {
  protected:
   TAITANK_TEST_HAD_OVERFLOW() {
-    root = TaitankNodeCreate();
-    set_taitank_node_style_width(root, 200);
-    set_taitank_node_style_height(root, 100);
-    set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_COLUMN);
-    set_taitank_node_style_flex_wrap(root, FLEX_NO_WRAP);
+    root = NodeCreate();
+    SetWidth(root, 200);
+    SetHeight(root, 100);
+    SetFlexDirection(root, FLEX_DIRECTION_COLUMN);
+    SetFlexWrap(root, FLEX_NO_WRAP);
   }
 
-  ~TAITANK_TEST_HAD_OVERFLOW() { TaitankNodeFreeRecursive(root); }
+  ~TAITANK_TEST_HAD_OVERFLOW() { NodeFreeRecursive(root); }
 
   TaitankNodeRef root;
 };
 
 TEST_F(TAITANK_TEST_HAD_OVERFLOW, children_overflow_no_wrap_and_no_flex_children) {
-  const TaitankNodeRef child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(child0, 80);
-  set_taitank_node_style_height(child0, 40);
-  set_taitank_node_style_margin(child0, CSS_TOP, 10);
-  set_taitank_node_style_margin(child0, CSS_BOTTOM, 15);
-  TaitankNodeInsertChild(root, child0, 0);
-  const TaitankNodeRef child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(child1, 80);
-  set_taitank_node_style_height(child1, 40);
-  set_taitank_node_style_margin(child1, CSS_BOTTOM, 5);
-  TaitankNodeInsertChild(root, child1, 1);
+  const TaitankNodeRef child0 = NodeCreate();
+  SetWidth(child0, 80);
+  SetHeight(child0, 40);
+  SetMargin(child0, CSS_TOP, 10);
+  SetMargin(child0, CSS_BOTTOM, 15);
+  InsertChild(root, child0, 0);
+  const TaitankNodeRef child1 = NodeCreate();
+  SetWidth(child1, 80);
+  SetHeight(child1, 40);
+  SetMargin(child1, CSS_BOTTOM, 5);
+  InsertChild(root, child1, 1);
 
-  TaitankNodeDoLayout(root, 200, 100);
+  DoLayout(root, 200, 100);
 
-  ASSERT_TRUE(get_taitank_node_layout_had_overflow(root));
+  ASSERT_TRUE(GetHadOverflow(root));
 }
 
 TEST_F(TAITANK_TEST_HAD_OVERFLOW, spacing_overflow_no_wrap_and_no_flex_children) {
-  const TaitankNodeRef child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(child0, 80);
-  set_taitank_node_style_height(child0, 40);
-  set_taitank_node_style_margin(child0, CSS_TOP, 10);
-  set_taitank_node_style_margin(child0, CSS_BOTTOM, 10);
-  TaitankNodeInsertChild(root, child0, 0);
-  const TaitankNodeRef child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(child1, 80);
-  set_taitank_node_style_height(child1, 40);
-  set_taitank_node_style_margin(child1, CSS_BOTTOM, 5);
-  TaitankNodeInsertChild(root, child1, 1);
+  const TaitankNodeRef child0 = NodeCreate();
+  SetWidth(child0, 80);
+  SetHeight(child0, 40);
+  SetMargin(child0, CSS_TOP, 10);
+  SetMargin(child0, CSS_BOTTOM, 10);
+  InsertChild(root, child0, 0);
+  const TaitankNodeRef child1 = NodeCreate();
+  SetWidth(child1, 80);
+  SetHeight(child1, 40);
+  SetMargin(child1, CSS_BOTTOM, 5);
+  InsertChild(root, child1, 1);
 
-  TaitankNodeDoLayout(root, 200, 100);
+  DoLayout(root, 200, 100);
 
-  ASSERT_TRUE(get_taitank_node_layout_had_overflow(root));
+  ASSERT_TRUE(GetHadOverflow(root));
 }
 
 TEST_F(TAITANK_TEST_HAD_OVERFLOW, no_overflow_no_wrap_and_flex_children) {
-  const TaitankNodeRef child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(child0, 80);
-  set_taitank_node_style_height(child0, 40);
-  set_taitank_node_style_margin(child0, CSS_TOP, 10);
-  set_taitank_node_style_margin(child0, CSS_BOTTOM, 10);
-  TaitankNodeInsertChild(root, child0, 0);
-  const TaitankNodeRef child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(child1, 80);
-  set_taitank_node_style_height(child1, 40);
-  set_taitank_node_style_margin(child1, CSS_BOTTOM, 5);
-  set_taitank_node_style_flex_shrink(child1, 1);
-  TaitankNodeInsertChild(root, child1, 1);
+  const TaitankNodeRef child0 = NodeCreate();
+  SetWidth(child0, 80);
+  SetHeight(child0, 40);
+  SetMargin(child0, CSS_TOP, 10);
+  SetMargin(child0, CSS_BOTTOM, 10);
+  InsertChild(root, child0, 0);
+  const TaitankNodeRef child1 = NodeCreate();
+  SetWidth(child1, 80);
+  SetHeight(child1, 40);
+  SetMargin(child1, CSS_BOTTOM, 5);
+  SetFlexShrink(child1, 1);
+  InsertChild(root, child1, 1);
 
-  TaitankNodeDoLayout(root, 200, 100);
+  DoLayout(root, 200, 100);
 
-  ASSERT_FALSE(get_taitank_node_layout_had_overflow(root));
+  ASSERT_FALSE(GetHadOverflow(root));
 }
 
 TEST_F(TAITANK_TEST_HAD_OVERFLOW, hadOverflow_gets_reset_if_not_logger_valid) {
-  const TaitankNodeRef child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(child0, 80);
-  set_taitank_node_style_height(child0, 40);
-  set_taitank_node_style_margin(child0, CSS_TOP, 10);
-  set_taitank_node_style_margin(child0, CSS_BOTTOM, 10);
-  TaitankNodeInsertChild(root, child0, 0);
-  const TaitankNodeRef child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(child1, 80);
-  set_taitank_node_style_height(child1, 40);
-  set_taitank_node_style_margin(child1, CSS_BOTTOM, 5);
-  TaitankNodeInsertChild(root, child1, 1);
+  const TaitankNodeRef child0 = NodeCreate();
+  SetWidth(child0, 80);
+  SetHeight(child0, 40);
+  SetMargin(child0, CSS_TOP, 10);
+  SetMargin(child0, CSS_BOTTOM, 10);
+  InsertChild(root, child0, 0);
+  const TaitankNodeRef child1 = NodeCreate();
+  SetWidth(child1, 80);
+  SetHeight(child1, 40);
+  SetMargin(child1, CSS_BOTTOM, 5);
+  InsertChild(root, child1, 1);
 
-  TaitankNodeDoLayout(root, 200, 100);
+  DoLayout(root, 200, 100);
 
-  ASSERT_TRUE(get_taitank_node_layout_had_overflow(root));
+  ASSERT_TRUE(GetHadOverflow(root));
 
-  set_taitank_node_style_flex_shrink(child1, 1);
+  SetFlexShrink(child1, 1);
 
-  TaitankNodeDoLayout(root, 200, 100);
-  ASSERT_FALSE(get_taitank_node_layout_had_overflow(root));
+  DoLayout(root, 200, 100);
+  ASSERT_FALSE(GetHadOverflow(root));
 }
 
 TEST_F(TAITANK_TEST_HAD_OVERFLOW, spacing_overflow_in_nested_nodes) {
-  const TaitankNodeRef child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(child0, 80);
-  set_taitank_node_style_height(child0, 40);
-  set_taitank_node_style_margin(child0, CSS_TOP, 10);
-  set_taitank_node_style_margin(child0, CSS_BOTTOM, 10);
-  TaitankNodeInsertChild(root, child0, 0);
-  const TaitankNodeRef child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(child1, 80);
-  set_taitank_node_style_height(child1, 40);
-  TaitankNodeInsertChild(root, child1, 1);
-  const TaitankNodeRef child1_1 = TaitankNodeCreate();
-  set_taitank_node_style_width(child1_1, 80);
-  set_taitank_node_style_height(child1_1, 40);
-  set_taitank_node_style_margin(child1_1, CSS_BOTTOM, 5);
-  TaitankNodeInsertChild(child1, child1_1, 0);
+  const TaitankNodeRef child0 = NodeCreate();
+  SetWidth(child0, 80);
+  SetHeight(child0, 40);
+  SetMargin(child0, CSS_TOP, 10);
+  SetMargin(child0, CSS_BOTTOM, 10);
+  InsertChild(root, child0, 0);
+  const TaitankNodeRef child1 = NodeCreate();
+  SetWidth(child1, 80);
+  SetHeight(child1, 40);
+  InsertChild(root, child1, 1);
+  const TaitankNodeRef child1_1 = NodeCreate();
+  SetWidth(child1_1, 80);
+  SetHeight(child1_1, 40);
+  SetMargin(child1_1, CSS_BOTTOM, 5);
+  InsertChild(child1, child1_1, 0);
 
-  TaitankNodeDoLayout(root, 200, 100);
+  DoLayout(root, 200, 100);
 
-  ASSERT_TRUE(get_taitank_node_layout_had_overflow(root));
+  ASSERT_TRUE(GetHadOverflow(root));
 }

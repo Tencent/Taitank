@@ -24,29 +24,29 @@
 using namespace taitank;
 
 TEST(TAITANK_TEST, zero_out_layout) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_width(root, 200);
-  set_taitank_node_style_height(root, 200);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetWidth(root, 200);
+  SetHeight(root, 200);
 
-  const TaitankNodeRef child = TaitankNodeCreate();
-  TaitankNodeInsertChild(root, child, 0);
-  set_taitank_node_style_width(child, 100);
-  set_taitank_node_style_height(child, 100);
-  set_taitank_node_style_margin(child, CSS_TOP, 10);
-  set_taitank_node_style_padding(child, CSS_TOP, 10);
+  const TaitankNodeRef child = NodeCreate();
+  InsertChild(root, child, 0);
+  SetWidth(child, 100);
+  SetHeight(child, 100);
+  SetMargin(child, CSS_TOP, 10);
+  SetPadding(child, CSS_TOP, 10);
 
-  TaitankNodeDoLayout(root, 100, 100);
+  DoLayout(root, 100, 100);
 
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_margin(child, CSS_TOP));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_padding(child, CSS_TOP));
+  ASSERT_FLOAT_EQ(10, GetMargin(child, CSS_TOP));
+  ASSERT_FLOAT_EQ(10, GetPadding(child, CSS_TOP));
 
-  set_taitank_node_style_display(child, DISPLAY_TYPE_NONE);
+  SetDisplay(child, DISPLAY_TYPE_NONE);
 
-  TaitankNodeDoLayout(root, 100, 100);
+  DoLayout(root, 100, 100);
 
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_margin(child, CSS_TOP));
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_padding(child, CSS_TOP));
+  ASSERT_FLOAT_EQ(0, GetMargin(child, CSS_TOP));
+  ASSERT_FLOAT_EQ(0, GetPadding(child, CSS_TOP));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }

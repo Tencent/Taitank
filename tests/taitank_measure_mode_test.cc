@@ -38,7 +38,7 @@ struct _MeasureConstraintList {
 static TaitankSize _measure(TaitankNodeRef node, float width, MeasureMode widthMode, float height,
                             MeasureMode heightMode, void *layoutContext) {
   struct _MeasureConstraintList *constraintList =
-      (struct _MeasureConstraintList *)node->get_context();
+      (struct _MeasureConstraintList *)node->GetContext();
   struct _MeasureConstraint *constraints = constraintList->constraints;
   uint32_t currentIndex = constraintList->length;
   (&constraints[currentIndex])->width = width;
@@ -58,18 +58,18 @@ static TaitankSize _measure(TaitankNodeRef node, float width, MeasureMode widthM
       .length = 0, .constraints = (struct _MeasureConstraint *) malloc(
           10 * sizeof(struct _MeasureConstraint)), };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  //  root_child0->set_context(&constraintList);
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  //  root_child0->SetContext(&constraintList);
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
   //  root_child0->measure_=(_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -77,7 +77,7 @@ static TaitankSize _measure(TaitankNodeRef node, float width, MeasureMode widthM
   ASSERT_EQ(MEASURE_MODE_EXACTLY, constraintList.constraints[0].widthMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, exactly_measure_stretched_child_row) {
@@ -85,18 +85,18 @@ TEST(TAITANK_TEST, exactly_measure_stretched_child_row) {
       .length = 0, .constraints = (struct _MeasureConstraint *) malloc(
           10 * sizeof(struct _MeasureConstraint)), };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  //  root_child0->set_context(&constraintList);
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  //  root_child0->SetContext(&constraintList);
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -104,7 +104,7 @@ TEST(TAITANK_TEST, exactly_measure_stretched_child_row) {
   ASSERT_EQ(MEASURE_MODE_EXACTLY, constraintList.constraints[0].heightMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }*/
 
 TEST(TAITANK_TEST, at_most_main_axis_column) {
@@ -113,16 +113,16 @@ TEST(TAITANK_TEST, at_most_main_axis_column) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -130,7 +130,7 @@ TEST(TAITANK_TEST, at_most_main_axis_column) {
   ASSERT_EQ(MEASURE_MODE_AT_MOST, constraintList.constraints[0].heightMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, at_most_cross_axis_column) {
@@ -139,17 +139,17 @@ TEST(TAITANK_TEST, at_most_cross_axis_column) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -157,7 +157,7 @@ TEST(TAITANK_TEST, at_most_cross_axis_column) {
   ASSERT_EQ(MEASURE_MODE_AT_MOST, constraintList.constraints[0].widthMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, at_most_main_axis_row) {
@@ -166,17 +166,17 @@ TEST(TAITANK_TEST, at_most_main_axis_row) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -184,7 +184,7 @@ TEST(TAITANK_TEST, at_most_main_axis_row) {
   ASSERT_EQ(MEASURE_MODE_AT_MOST, constraintList.constraints[0].widthMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, at_most_cross_axis_row) {
@@ -193,18 +193,18 @@ TEST(TAITANK_TEST, at_most_cross_axis_row) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -212,7 +212,7 @@ TEST(TAITANK_TEST, at_most_cross_axis_row) {
   ASSERT_EQ(MEASURE_MODE_AT_MOST, constraintList.constraints[0].heightMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, flex_child) {
@@ -221,16 +221,16 @@ TEST(TAITANK_TEST, flex_child) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(2, constraintList.length);
 
@@ -241,7 +241,7 @@ TEST(TAITANK_TEST, flex_child) {
   ASSERT_EQ(MEASURE_MODE_EXACTLY, constraintList.constraints[1].heightMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, flex_child_with_flex_basis) {
@@ -250,17 +250,17 @@ TEST(TAITANK_TEST, flex_child_with_flex_basis) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_flex_basis(root_child0, 0);
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetFlexBasis(root_child0, 0);
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -268,7 +268,7 @@ TEST(TAITANK_TEST, flex_child_with_flex_basis) {
   ASSERT_EQ(MEASURE_MODE_EXACTLY, constraintList.constraints[0].heightMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, overflow_scroll_column) {
@@ -277,18 +277,18 @@ TEST(TAITANK_TEST, overflow_scroll_column) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_overflow(root, OVERFLOW_SCROLL);
-  set_taitank_node_style_height(root, 100);
-  set_taitank_node_style_width(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetOverflow(root, OVERFLOW_SCROLL);
+  SetHeight(root, 100);
+  SetWidth(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -299,7 +299,7 @@ TEST(TAITANK_TEST, overflow_scroll_column) {
   ASSERT_EQ(MEASURE_MODE_UNDEFINED, constraintList.constraints[0].heightMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, overflow_scroll_row) {
@@ -308,19 +308,19 @@ TEST(TAITANK_TEST, overflow_scroll_row) {
       .constraints = (struct _MeasureConstraint *)malloc(10 * sizeof(struct _MeasureConstraint)),
   };
 
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_overflow(root, OVERFLOW_SCROLL);
-  set_taitank_node_style_height(root, 100);
-  set_taitank_node_style_width(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetOverflow(root, OVERFLOW_SCROLL);
+  SetHeight(root, 100);
+  SetWidth(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  root_child0->set_context(&constraintList);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  root_child0->SetContext(&constraintList);
   root_child0->measure_ = (_measure);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   ASSERT_EQ(1, constraintList.length);
 
@@ -331,5 +331,5 @@ TEST(TAITANK_TEST, overflow_scroll_row) {
   ASSERT_EQ(MEASURE_MODE_AT_MOST, constraintList.constraints[0].heightMode);
 
   free(constraintList.constraints);
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
