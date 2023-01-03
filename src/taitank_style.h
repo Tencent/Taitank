@@ -1,14 +1,14 @@
 /*
  *
- * Tencent is pleased to support the open source community by making Taitank available. 
+ * Tencent is pleased to support the open source community by making Taitank available.
  * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http:// www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed in writing, software
  * distributed under the License is distributed on an “AS IS” BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef TAITANK_TAITANK_STYLE_H_
-#define TAITANK_TAITANK_STYLE_H_
+#pragma once
 
 #include <memory.h>
 
@@ -34,35 +33,37 @@ const int kCssPropsCount = 6;
 class TaitankStyle {
  public:
   TaitankStyle();
-  virtual ~TaitankStyle();
+  virtual ~TaitankStyle() = default;
+  TaitankStyle(const TaitankStyle&) = default;
+  TaitankStyle& operator=(const TaitankStyle&) = default;
+
   std::string toString();
-  void set_direction(const TaitankDirection direction) { direction_ = direction; }
+  void SetDirection(const TaitankDirection direction) { direction_ = direction; }
+  bool SetMargin(CSSDirection dir, float value);
+  bool SetPadding(CSSDirection dir, float value);
+  bool SetBorder(CSSDirection dir, float value);
+  bool SetPosition(CSSDirection dir, float value);
+  float GetStartPosition(FlexDirection axis);
+  float GetEndPosition(FlexDirection axis);
+  void SetDimension(FlexDirection axis, float value);
+  void SetDimension(Dimension dimension, float value);
+  float GetDimension(FlexDirection axis);
+  float GetDimension(Dimension dimension);
 
-  bool set_margin(CSSDirection dir, float value);
-  bool set_padding(CSSDirection dir, float value);
-  bool set_border(CSSDirection dir, float value);
+  bool IsDimensionAuto(FlexDirection axis);
+  float GetStartBorder(FlexDirection axis);
+  float GetEndBorder(FlexDirection axis);
+  float GetStartPadding(FlexDirection axis);
+  float GetEndPadding(FlexDirection axis);
+  float GetStartMargin(FlexDirection axis);
+  float GetEndMargin(FlexDirection axis);
+  float GetMargin(FlexDirection axis);
+  bool IsAutoStartMargin(FlexDirection axis);
+  bool IsAutoEndMargin(FlexDirection axis);
+  bool IsAutoMargin(FlexDirection axis);
 
-  bool is_dimension_auto(FlexDirection axis);
-  float get_start_border(FlexDirection axis);
-  float get_end_border(FlexDirection axis);
-  float get_start_padding(FlexDirection axis);
-  float get_end_padding(FlexDirection axis);
-  float get_start_margin(FlexDirection axis);
-  float get_end_margin(FlexDirection axis);
-  float get_margin(FlexDirection axis);
-  bool is_auto_start_margin(FlexDirection axis);
-  bool is_auto_end_margin(FlexDirection axis);
-  bool has_auto_margin(FlexDirection axis);
-
-  bool set_position(CSSDirection dir, float value);
-  float get_start_position(FlexDirection axis);
-  float get_end_position(FlexDirection axis);
-  void set_dim(FlexDirection axis, float value);
-  float get_dim(FlexDirection axis);
-  void set_dim(Dimension dimension, float value);
-  float get_dim(Dimension dimension);
-  bool is_overflow_scroll();
-  float get_flex_basis();
+  bool IsOverflowScroll();
+  float GetFlexBasis();
 
  public:
   NodeType node_type_;
@@ -99,5 +100,3 @@ class TaitankStyle {
 };
 
 }  // namespace taitank
-
-#endif  // TAITANK_TAITANK_STYLE_H_

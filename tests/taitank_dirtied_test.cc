@@ -24,99 +24,99 @@
 using namespace taitank;
 
 static void _dirtied(TaitankNodeRef node) {
-  int *dirtiedCount = reinterpret_cast<int *>(node->get_context());
+  int *dirtiedCount = reinterpret_cast<int *>(node->GetContext());
   (*dirtiedCount)++;
 }
 
 TEST(TAITANK_TEST, dirtied) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   int dirtiedCount = 0;
-  root->set_context(&dirtiedCount);
-  root->set_dirtied_function(_dirtied);
+  root->SetContext(&dirtiedCount);
+  root->SetDirtiedFunction(_dirtied);
 
   ASSERT_EQ(0, dirtiedCount);
 
   // `_dirtied` MUST be called in case of explicit dirtying.
-  root->set_dirty(true);
+  root->SetDirty(true);
   ASSERT_EQ(1, dirtiedCount);
 
   // `_dirtied` MUST be called ONCE.
-  root->set_dirty(true);
+  root->SetDirty(true);
   ASSERT_EQ(1, dirtiedCount);
 }
 
 TEST(TAITANK_TEST, dirtied_propagation) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child0, 50);
-  set_taitank_node_style_height(root_child0, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetWidth(root_child0, 50);
+  SetHeight(root_child0, 20);
+  InsertChild(root, root_child0, 0);
 
-  const TaitankNodeRef root_child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child1, 50);
-  set_taitank_node_style_height(root_child1, 20);
-  TaitankNodeInsertChild(root, root_child1, 1);
+  const TaitankNodeRef root_child1 = NodeCreate();
+  SetWidth(root_child1, 50);
+  SetHeight(root_child1, 20);
+  InsertChild(root, root_child1, 1);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   int dirtiedCount = 0;
-  root->set_context(&dirtiedCount);
-  root->set_dirtied_function(_dirtied);
+  root->SetContext(&dirtiedCount);
+  root->SetDirtiedFunction(_dirtied);
 
   ASSERT_EQ(0, dirtiedCount);
 
   // `_dirtied` MUST be called for the first time.
-  root_child0->markAsDirty();
+  root_child0->MarkAsDirty();
   ASSERT_EQ(1, dirtiedCount);
 
   // `_dirtied` must NOT be called for the second time.
-  root_child0->markAsDirty();
+  root_child0->MarkAsDirty();
   ASSERT_EQ(1, dirtiedCount);
 }
 
 TEST(TAITANK_TEST, dirtied_hierarchy) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child0, 50);
-  set_taitank_node_style_height(root_child0, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetWidth(root_child0, 50);
+  SetHeight(root_child0, 20);
+  InsertChild(root, root_child0, 0);
 
-  const TaitankNodeRef root_child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child1, 50);
-  set_taitank_node_style_height(root_child1, 20);
-  TaitankNodeInsertChild(root, root_child1, 1);
+  const TaitankNodeRef root_child1 = NodeCreate();
+  SetWidth(root_child1, 50);
+  SetHeight(root_child1, 20);
+  InsertChild(root, root_child1, 1);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   int dirtiedCount = 0;
-  root_child0->set_context(&dirtiedCount);
-  root_child0->set_dirtied_function(_dirtied);
+  root_child0->SetContext(&dirtiedCount);
+  root_child0->SetDirtiedFunction(_dirtied);
 
   ASSERT_EQ(0, dirtiedCount);
 
   // `_dirtied` must NOT be called for descendants.
-  root->markAsDirty();
+  root->MarkAsDirty();
   ASSERT_EQ(0, dirtiedCount);
 
   // `_dirtied` must NOT be called for the sibling node.
-  root_child1->markAsDirty();
+  root_child1->MarkAsDirty();
   ASSERT_EQ(0, dirtiedCount);
 
   // `_dirtied` MUST be called in case of explicit dirtying.
-  root_child0->markAsDirty();
+  root_child0->MarkAsDirty();
   ASSERT_EQ(1, dirtiedCount);
 }

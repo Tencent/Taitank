@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef TAITANK_TAITANK_FLEXLINE_H_
-#define TAITANK_TAITANK_FLEXLINE_H_
+#pragma once
 
 #include <vector>
 
@@ -37,7 +36,7 @@ class FlexLine {
  public:
   explicit FlexLine(TaitankNodeRef container);
   void AddItem(TaitankNodeRef item);
-  bool is_empty();
+  bool IsEmpty();
   FlexSign Sign() const {
     return sum_hypothetical_main_size_ < container_main_inner_size_ ? PositiveFlexibility
                                                                     : NegativeFlexibility;
@@ -70,5 +69,3 @@ class FlexLine {
   float remaining_free_space_;
 };
 }  // namespace taitank
-
-#endif  // TAITANK_TAITANK_FLEXLINE_H_

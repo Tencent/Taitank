@@ -24,151 +24,151 @@
 using namespace taitank;
 
 TEST(TAITANK_TEST, start_overrides) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_margin(root_child0, CSS_START, 10);
-  set_taitank_node_style_margin(root_child0, CSS_END, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetMargin(root_child0, CSS_START, 10);
+  SetMargin(root_child0, CSS_END, 20);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_right(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(10, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(20, GetRight(root_child0));
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED, DIRECTION_RTL);
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_right(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED, DIRECTION_RTL);
+  ASSERT_FLOAT_EQ(20, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(10, GetRight(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, end_overrides) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_margin(root_child0, CSS_START, 20);
-  set_taitank_node_style_margin(root_child0, CSS_END, 10);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetMargin(root_child0, CSS_START, 20);
+  SetMargin(root_child0, CSS_END, 10);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_right(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(20, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(10, GetRight(root_child0));
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED, DIRECTION_RTL);
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_right(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED, DIRECTION_RTL);
+  ASSERT_FLOAT_EQ(10, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(20, GetRight(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, horizontal_overridden) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_margin(root_child0, CSS_HORIZONTAL, 10);
-  set_taitank_node_style_margin(root_child0, CSS_LEFT, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetMargin(root_child0, CSS_HORIZONTAL, 10);
+  SetMargin(root_child0, CSS_LEFT, 20);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_right(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(20, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(10, GetRight(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, vertical_overridden) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_COLUMN);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_COLUMN);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_margin(root_child0, CSS_VERTICAL, 10);
-  set_taitank_node_style_margin(root_child0, CSS_TOP, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetMargin(root_child0, CSS_VERTICAL, 10);
+  SetMargin(root_child0, CSS_TOP, 20);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_top(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_bottom(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(20, GetTop(root_child0));
+  ASSERT_FLOAT_EQ(10, GetBottom(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, horizontal_overrides_all) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_COLUMN);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_COLUMN);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_margin(root_child0, CSS_HORIZONTAL, 10);
-  set_taitank_node_style_margin(root_child0, CSS_ALL, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetMargin(root_child0, CSS_HORIZONTAL, 10);
+  SetMargin(root_child0, CSS_ALL, 20);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_top(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_right(root_child0));
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_bottom(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(10, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(20, GetTop(root_child0));
+  ASSERT_FLOAT_EQ(10, GetRight(root_child0));
+  ASSERT_FLOAT_EQ(20, GetBottom(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, vertical_overrides_all) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_COLUMN);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_COLUMN);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_margin(root_child0, CSS_VERTICAL, 10);
-  set_taitank_node_style_margin(root_child0, CSS_ALL, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetMargin(root_child0, CSS_VERTICAL, 10);
+  SetMargin(root_child0, CSS_ALL, 20);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_top(root_child0));
-  ASSERT_FLOAT_EQ(20, get_taitank_node_layout_right(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_bottom(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(20, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(10, GetTop(root_child0));
+  ASSERT_FLOAT_EQ(20, GetRight(root_child0));
+  ASSERT_FLOAT_EQ(10, GetBottom(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, all_overridden) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_COLUMN);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_COLUMN);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(root_child0, 1);
-  set_taitank_node_style_margin(root_child0, CSS_LEFT, 10);
-  set_taitank_node_style_margin(root_child0, CSS_TOP, 10);
-  set_taitank_node_style_margin(root_child0, CSS_RIGHT, 10);
-  set_taitank_node_style_margin(root_child0, CSS_BOTTOM, 10);
-  set_taitank_node_style_margin(root_child0, CSS_ALL, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetFlexGrow(root_child0, 1);
+  SetMargin(root_child0, CSS_LEFT, 10);
+  SetMargin(root_child0, CSS_TOP, 10);
+  SetMargin(root_child0, CSS_RIGHT, 10);
+  SetMargin(root_child0, CSS_BOTTOM, 10);
+  SetMargin(root_child0, CSS_ALL, 20);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_left(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_top(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_right(root_child0));
-  ASSERT_FLOAT_EQ(10, get_taitank_node_layout_bottom(root_child0));
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(10, GetLeft(root_child0));
+  ASSERT_FLOAT_EQ(10, GetTop(root_child0));
+  ASSERT_FLOAT_EQ(10, GetRight(root_child0));
+  ASSERT_FLOAT_EQ(10, GetBottom(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }

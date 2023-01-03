@@ -56,7 +56,7 @@ void FlexLine::AddItem(TaitankNodeRef item) {
   items_.push_back(item);
 }
 
-bool FlexLine::is_empty() { return items_.size() == 0; }
+bool FlexLine::IsEmpty() { return items_.size() == 0; }
 
 /*9.7. Resolving Flexible Lengths
  * 1. Determine the used flex factor. Sum the outer hypothetical main sizes of all items on the
@@ -95,7 +95,7 @@ void FlexLine::FreezeInflexibleItems(FlexLayoutAction layoutAction) {
          item->layout_result_.flex_base_size > item->layout_result_.hypothetical_main_axis_size) ||
         (flexSign == NegativeFlexibility &&
          item->layout_result_.flex_base_size < item->layout_result_.hypothetical_main_axis_size)) {
-      item->set_layout_dim(mainAxis, item->layout_result_.hypothetical_main_axis_size);
+      item->SetLayoutDimension(mainAxis, item->layout_result_.hypothetical_main_axis_size);
       inFlexibleItems.push_back(item);
     }
   }
@@ -115,11 +115,11 @@ void FlexLine::FreezeViolations(std::vector<TaitankNode*>& violations) {
     TaitankNodeRef item = violations[i];
     if (item->is_frozen_) continue;
     remaining_free_space_ -=
-        (item->get_layout_dim(mainAxis) - item->layout_result_.hypothetical_main_axis_size);
+        (item->GetLayoutDimension(mainAxis) - item->layout_result_.hypothetical_main_axis_size);
     total_flex_grow_ -= item->style_.flex_grow_;
     total_flex_shrink_ -= item->style_.flex_shrink_;
     total_weighted_flex_shrink_ -= item->style_.flex_shrink_ * item->layout_result_.flex_base_size;
-    total_weighted_flex_shrink_ = fmax(total_weighted_flex_shrink_, 0.0);
+    total_weighted_flex_shrink_ = fmax(total_weighted_flex_shrink_, 0.0f);
     item->is_frozen_ = true;
   }
 }
@@ -172,8 +172,8 @@ bool FlexLine::ResolveFlexibleLengths() {
       // Set the item's target main size to its flex base size minus a fraction of the absolute
       // value of the remaining free space proportional to the ratio.
       float itemMainSize = item->layout_result_.hypothetical_main_axis_size + extraSpace;
-      float adjustItemMainSize = item->get_bound_axis(mainAxis, itemMainSize);
-      item->set_layout_dim(mainAxis, adjustItemMainSize);
+      float adjustItemMainSize = item->GetBoundAxis(mainAxis, itemMainSize);
+      item->SetLayoutDimension(mainAxis, adjustItemMainSize);
       // use hypotheticalMainAxisSize  instead of item->boundAxis(mainAxis, item->result.flexBasis);
       usedFreeSpace += adjustItemMainSize - item->layout_result_.hypothetical_main_axis_size;
       violation = adjustItemMainSize - itemMainSize;
@@ -194,13 +194,13 @@ bool FlexLine::ResolveFlexibleLengths() {
    * Negative
    * Freeze all the items with max violations.
    */
-  if (totalViolation) {
+  if (static_cast<bool>(totalViolation)) {
     FreezeViolations(totalViolation < 0 ? maxViolations : minViolations);
   } else {
     remaining_free_space_ -= usedFreeSpace;
   }
 
-  return !totalViolation;
+  return !static_cast<bool>(totalViolation);;
 }
 
 /*
@@ -215,17 +215,17 @@ void FlexLine::AlignItems() {
   // because 'alignItems' calculate item's positions
   // which influenced by node's layout direction property.
   FlexDirection mainAxis = flex_container_->ResolveMainAxis();
-  int itemsSize = items_.size();
+  auto itemsSize = items_.size();
   // get autoMargin count,assure remainingFreeSpace Calculate again
   remaining_free_space_ = container_main_inner_size_;
   int autoMarginCount = 0;
-  for (int i = 0; i < itemsSize; i++) {
+  for (size_t i = 0; i < itemsSize; i++) {
     TaitankNodeRef item = items_[i];
-    remaining_free_space_ -= (item->get_layout_dim(mainAxis) + item->get_margin(mainAxis));
-    if (item->is_auto_start_margin(mainAxis)) {
+    remaining_free_space_ -= (item->GetLayoutDimension(mainAxis) + item->GetMargin(mainAxis));
+    if (item->IsAutoStartMargin(mainAxis)) {
       autoMarginCount++;
     }
-    if (item->is_auto_end_margin(mainAxis)) {
+    if (item->IsAutoEndMargin(mainAxis)) {
       autoMarginCount++;
     }
   }
@@ -238,29 +238,29 @@ void FlexLine::AlignItems() {
 
   float autoMargin = 0;
   if (remaining_free_space_ > 0 && autoMarginCount > 0) {
-    autoMargin = remaining_free_space_ / autoMarginCount;
+    autoMargin = remaining_free_space_ / static_cast<float>(autoMarginCount);
     remaining_free_space_ = 0;
   }
 
-  for (int i = 0; i < itemsSize; i++) {
+  for (size_t i = 0; i < itemsSize; i++) {
     TaitankNodeRef item = items_[i];
-    if (item->is_auto_start_margin(mainAxis)) {
-      item->set_layout_start_margin(mainAxis, autoMargin);
+    if (item->IsAutoStartMargin(mainAxis)) {
+      item->SetLayoutStartMargin(mainAxis, autoMargin);
     } else {
       // For margin:: assign style value to result value at this place..
-      item->set_layout_start_margin(mainAxis, item->get_start_margin(mainAxis));
+      item->SetLayoutStartMargin(mainAxis, item->GetStartMargin(mainAxis));
     }
 
-    if (item->is_auto_end_margin(mainAxis)) {
-      item->set_layout_end_margin(mainAxis, autoMargin);
+    if (item->IsAutoEndMargin(mainAxis)) {
+      item->SetLayoutEndMargin(mainAxis, autoMargin);
     } else {
-      item->set_layout_end_margin(mainAxis, item->get_end_margin(mainAxis));
+      item->SetLayoutEndMargin(mainAxis, item->GetEndMargin(mainAxis));
     }
   }
 
   // 2. Align the items along the main-axis per justify-content.
-  float offset = flex_container_->get_start_padding_and_border(mainAxis);
-  TaitankStyle style = flex_container_->get_style();
+  float offset = flex_container_->GetStartPaddingAndBorder(mainAxis);
+  TaitankStyle style = flex_container_->GetStyle();
   float space = 0;
   switch (style.justify_content_) {
     case FLEX_ALIGN_START:
@@ -272,14 +272,14 @@ void FlexLine::AlignItems() {
       offset += remaining_free_space_;
       break;
     case FLEX_ALIGN_SPACE_BETWEEN:
-      space = remaining_free_space_ / (itemsSize - 1);
+      space = remaining_free_space_ / (static_cast<float>(itemsSize - 1));
       break;
     case FLEX_ALIGN_SPACE_AROUND:
-      space = remaining_free_space_ / itemsSize;
+      space = remaining_free_space_ / static_cast<float>(itemsSize);
       offset += space / 2;
       break;
     case FLEX_ALIGN_SPACE_EVENLY:
-      space = remaining_free_space_ / (itemsSize + 1);
+      space = remaining_free_space_ / (static_cast<float>(itemsSize + 1));
       offset += space;
       break;
     default:
@@ -287,13 +287,13 @@ void FlexLine::AlignItems() {
   }
 
   // start end position set.
-  for (int i = 0; i < itemsSize; i++) {
+  for (size_t i = 0; i < itemsSize; i++) {
     TaitankNodeRef item = items_[i];
-    offset += item->get_layout_start_margin(mainAxis);
-    item->set_layout_start_position(mainAxis, offset);
-    item->set_layout_end_position(mainAxis, flex_container_->get_layout_dim(mainAxis) -
-                                                item->get_layout_dim(mainAxis) - offset);
-    offset += item->get_layout_dim(mainAxis) + item->get_layout_end_margin(mainAxis) + space;
+    offset += item->GetLayoutStartMargin(mainAxis);
+    item->SetLayoutStartPosition(mainAxis, offset);
+    item->SetLayoutEndPosition(mainAxis, flex_container_->GetLayoutDimension(mainAxis) -
+                                                item->GetLayoutDimension(mainAxis) - offset);
+    offset += item->GetLayoutDimension(mainAxis) + item->GetLayoutEndMargin(mainAxis) + space;
   }
 }
 

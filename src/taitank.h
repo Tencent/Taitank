@@ -17,72 +17,92 @@
  *
  */
 
-#ifndef TAITANK_TAITANK_H_
-#define TAITANK_TAITANK_H_
+#pragma once
 
 #include "taitank_node.h"
+#include "taitank_config.h"
 
 namespace taitank {
 
-TaitankNodeRef TaitankNodeCreate();
-void TaitankNodeFree(TaitankNodeRef node);
-void TaitankNodeFreeRecursive(TaitankNodeRef node);
+TaitankNodeRef NodeCreate();
+TaitankNodeRef NodeCreateWithConfig(TaitankConfigRef config);
+void NodeFree(TaitankNodeRef node);
+void NodeFreeRecursive(TaitankNodeRef node);
 
-bool set_taitank_node_measure_function(TaitankNodeRef node,
-                                       TaitankMeasureFunction measure_function);
-void set_taitank_node_style_direction(TaitankNodeRef node, TaitankDirection direction);
-void set_taitank_node_style_width(TaitankNodeRef node, float width);
-void set_taitank_node_style_height(TaitankNodeRef node, float height);
-void set_taitank_node_style_flex(TaitankNodeRef node, float flex);
-void set_taitank_node_style_flex_grow(TaitankNodeRef node, float flex_grow);
-void set_taitank_node_style_flex_shrink(TaitankNodeRef node, float flex_shrink);
-void set_taitank_node_style_flex_basis(TaitankNodeRef node, float flex_basis);
-void set_taitank_node_style_flex_direction(TaitankNodeRef node, FlexDirection direction);
-void set_taitank_node_style_position_type(TaitankNodeRef node, PositionType position_type);
-void set_taitank_node_style_position(TaitankNodeRef node, CSSDirection dir, float value);
-void set_taitank_node_style_margin(TaitankNodeRef node, CSSDirection dir, float value);
-void set_taitank_node_style_margin_auto(TaitankNodeRef node, CSSDirection dir);
-void set_taitank_node_style_padding(TaitankNodeRef node, CSSDirection dir, float value);
-void set_taitank_node_style_border(TaitankNodeRef node, CSSDirection dir, float value);
+bool SetMeasureFunction(TaitankNodeRef node, TaitankMeasureFunction measure_function);
+void SetDirection(TaitankNodeRef node, TaitankDirection direction);
+void SetWidth(TaitankNodeRef node, float width);
+void SetHeight(TaitankNodeRef node, float height);
+void SetFlex(TaitankNodeRef node, float flex);
+void SetFlexGrow(TaitankNodeRef node, float flex_grow);
+void SetFlexShrink(TaitankNodeRef node, float flex_shrink);
+void SetFlexBasis(TaitankNodeRef node, float flex_basis);
+void SetFlexDirection(TaitankNodeRef node, FlexDirection direction);
+void SetPositionType(TaitankNodeRef node, PositionType position_type);
+void SetPosition(TaitankNodeRef node, CSSDirection dir, float value);
+void SetMargin(TaitankNodeRef node, CSSDirection dir, float value);
+void SetMarginAuto(TaitankNodeRef node, CSSDirection dir);
+void SetPadding(TaitankNodeRef node, CSSDirection dir, float value);
+void SetBorder(TaitankNodeRef node, CSSDirection dir, float value);
 
-void set_taitank_node_style_flex_wrap(TaitankNodeRef node, FlexWrapMode wrap_mode);
-void set_taitank_node_style_justify_content(TaitankNodeRef node, FlexAlign justify);
-void set_taitank_node_style_align_content(TaitankNodeRef node, FlexAlign align);
-void set_taitank_node_style_align_items(TaitankNodeRef node, FlexAlign align);
-void set_taitank_node_style_align_self(TaitankNodeRef node, FlexAlign align);
-void set_taitank_node_style_display(TaitankNodeRef node, DisplayType display_type);
-void set_taitank_node_style_max_width(TaitankNodeRef node, float value);
-void set_taitank_node_style_max_height(TaitankNodeRef node, float value);
-void set_taitank_node_style_min_width(TaitankNodeRef node, float value);
-void set_taitank_node_style_min_height(TaitankNodeRef node, float value);
-void set_taitank_node_style_overflow(TaitankNodeRef node, OverflowType overflow_type);
-void set_taitank_node_node_type(TaitankNodeRef node, NodeType nodeType);
+void SetFlexWrap(TaitankNodeRef node, FlexWrapMode wrap_mode);
+void SetJustifyContent(TaitankNodeRef node, FlexAlign justify);
+void SetAlignContent(TaitankNodeRef node, FlexAlign align);
+void SetAlignItems(TaitankNodeRef node, FlexAlign align);
+void SetAlignSelf(TaitankNodeRef node, FlexAlign align);
+void SetDisplay(TaitankNodeRef node, DisplayType display_type);
+void SetMaxWidth(TaitankNodeRef node, float value);
+void SetMaxHeight(TaitankNodeRef node, float value);
+void SetMinWidth(TaitankNodeRef node, float value);
+void SetMinHeight(TaitankNodeRef node, float value);
+void SetOverflow(TaitankNodeRef node, OverflowType overflow_type);
+void SetNodeType(TaitankNodeRef node, NodeType nodeType);
 
-float get_taitank_node_layout_left(TaitankNodeRef node);
-float get_taitank_node_layout_top(TaitankNodeRef node);
-float get_taitank_node_layout_right(TaitankNodeRef node);
-float get_taitank_node_layout_bottom(TaitankNodeRef node);
-float get_taitank_node_layout_width(TaitankNodeRef node);
-float get_taitank_node_layout_height(TaitankNodeRef node);
-float get_taitank_node_layout_margin(TaitankNodeRef node, CSSDirection dir);
-float get_taitank_node_layout_padding(TaitankNodeRef node, CSSDirection dir);
-float get_taitank_node_layout_border(TaitankNodeRef node, CSSDirection dir);
-bool get_taitank_node_layout_had_overflow(TaitankNodeRef node);
+float GetLeft(TaitankNodeRef node);
+float GetTop(TaitankNodeRef node);
+float GetRight(TaitankNodeRef node);
+float GetBottom(TaitankNodeRef node);
+float GetWidth(TaitankNodeRef node);
+float GetHeight(TaitankNodeRef node);
+float GetMaxWidth(TaitankNodeRef node);
+float GetMaxHeight(TaitankNodeRef node);
+float GetMinWidth(TaitankNodeRef node);
+float GetMinHeight(TaitankNodeRef node);
+float GetMargin(TaitankNodeRef node, CSSDirection dir);
+float GetPadding(TaitankNodeRef node, CSSDirection dir);
+float GetBorder(TaitankNodeRef node, CSSDirection dir);
+float GetFlexGrow(TaitankNodeRef node);
+float GetFlexShrink(TaitankNodeRef node);
+DisplayType GetDisplay(TaitankNodeRef node);
+float GetFlexBasis(TaitankNodeRef node);
+FlexDirection GetFlexDirection(TaitankNodeRef node);
+FlexAlign GetJustifyContent(TaitankNodeRef node);
+FlexAlign GetAlignSelf(TaitankNodeRef node);
+FlexAlign GetAlignItems(TaitankNodeRef node);
+PositionType GetPositionType(TaitankNodeRef node);
+FlexWrapMode GetFlexWrap(TaitankNodeRef node);
+OverflowType GetOverflow(TaitankNodeRef node);
+bool GetHadOverflow(TaitankNodeRef node);
 
-bool TaitankNodeInsertChild(TaitankNodeRef node, TaitankNodeRef child, uint32_t index);
-bool TaitankNodeRemoveChild(TaitankNodeRef node, TaitankNodeRef child);
-// bool TaitankNodeHasNewLayout(TaitankNodeRef node);
-// void TaitankNodesetHasNewLayout(TaitankNodeRef node, bool hasNewLayout);
-bool get_taitank_node_has_new_layout(TaitankNodeRef node);
-void set_taitank_node_has_new_layout(TaitankNodeRef node, bool has_new_layout);
+void SetConfig(TaitankNodeRef node, TaitankConfigRef config);
+void ConfigFree(TaitankConfigRef);
+TaitankConfigRef ConfigGetDefault();
 
-void TaitankNodeMarkDirty(TaitankNodeRef node);
-bool TaitankNodeIsDirty(TaitankNodeRef node);
-void TaitankNodeDoLayout(TaitankNodeRef node, float parent_width, float parent_height,
+void SetContext(TaitankNodeRef node, void *context);
+void *GetContext(TaitankNodeRef node);
+
+bool InsertChild(TaitankNodeRef node, TaitankNodeRef child, uint32_t index);
+bool RemoveChild(TaitankNodeRef node, TaitankNodeRef child);
+uint32_t ChildCount(TaitankNodeRef node);
+TaitankNodeRef GetChild(TaitankNodeRef node, uint32_t index);
+bool GetHasNewLayout(TaitankNodeRef node);
+void SetHasNewLayout(TaitankNodeRef node, bool has_new_layout);
+
+void MarkDirty(TaitankNodeRef node);
+bool IsDirty(TaitankNodeRef node);
+void DoLayout(TaitankNodeRef node, float parent_width, float parent_height,
                          TaitankDirection direction = DIRECTION_LTR,
                          void* layout_context = nullptr);
-void TaitankNodePrint(TaitankNodeRef node);
-bool TaitankNodeReset(TaitankNodeRef node);
+void Print(TaitankNodeRef node);
+bool Reset(TaitankNodeRef node);
 }  // namespace taitank
-
-#endif  // TAITANK_TAITANK_H_

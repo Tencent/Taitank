@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef TAITANK_TAITANK_CACHE_H_
-#define TAITANK_TAITANK_CACHE_H_
+#pragma once
 
 #include <stdint.h>
 
@@ -42,9 +41,9 @@ class TaitankLayoutCache {
   virtual ~TaitankLayoutCache();
   void CacheResult(TaitankSize available_size, TaitankSize result_size,
                    TaitankSizeMode measure_mode, FlexLayoutAction layout_action);
-  MeasureResult *get_cached_measure_result(TaitankSize available_size, TaitankSizeMode measure_mode,
+  MeasureResult *GetCachedMeasureResult(TaitankSize available_size, TaitankSizeMode measure_mode,
                                            FlexLayoutAction layout_action, bool is_measure_node);
-  MeasureResult *get_cached_layout();
+  MeasureResult *GetCachedLayout();
   void ClearCache();
 
  protected:
@@ -61,5 +60,3 @@ class TaitankLayoutCache {
 };
 
 }  // namespace taitank
-
-#endif  // TAITANK_TAITANK_CACHE_H_

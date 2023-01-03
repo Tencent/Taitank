@@ -24,26 +24,26 @@
 using namespace taitank;
 
 TEST(TAITANK_TEST, reset_layout_when_child_removed) {
-  const TaitankNodeRef root = TaitankNodeCreate();
+  const TaitankNodeRef root = NodeCreate();
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child0, 100);
-  set_taitank_node_style_height(root_child0, 100);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetWidth(root_child0, 100);
+  SetHeight(root_child0, 100);
+  InsertChild(root, root_child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  ASSERT_EQ(0, get_taitank_node_layout_left(root_child0));
-  ASSERT_EQ(0, get_taitank_node_layout_top(root_child0));
-  ASSERT_EQ(100, get_taitank_node_layout_width(root_child0));
-  ASSERT_EQ(100, get_taitank_node_layout_height(root_child0));
+  ASSERT_EQ(0, GetLeft(root_child0));
+  ASSERT_EQ(0, GetTop(root_child0));
+  ASSERT_EQ(100, GetWidth(root_child0));
+  ASSERT_EQ(100, GetHeight(root_child0));
 
-  TaitankNodeRemoveChild(root, root_child0);
+  RemoveChild(root, root_child0);
 
-  ASSERT_EQ(0, get_taitank_node_layout_left(root_child0));
-  ASSERT_EQ(0, get_taitank_node_layout_top(root_child0));
-  ASSERT_TRUE(isUndefined(get_taitank_node_layout_width(root_child0)));
-  ASSERT_TRUE(isUndefined(get_taitank_node_layout_height(root_child0)));
+  ASSERT_EQ(0, GetLeft(root_child0));
+  ASSERT_EQ(0, GetTop(root_child0));
+  ASSERT_TRUE(isUndefined(GetWidth(root_child0)));
+  ASSERT_TRUE(isUndefined(GetHeight(root_child0)));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }

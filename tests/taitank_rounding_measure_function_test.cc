@@ -48,87 +48,87 @@ static TaitankSize _measureFractial(TaitankNodeRef node, float width, MeasureMod
 }
 
 TEST(TAITANK_TEST, rounding_feature_with_custom_measure_func_floor) {
-  const TaitankNodeRef root = TaitankNodeCreate();
+  const TaitankNodeRef root = NodeCreate();
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_measure_function(root_child0, _measureFloor);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetMeasureFunction(root_child0, _measureFloor);
   //  root_child0->setMeasureFunc(_measureFloor);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
   //  YGConfigSetPointScaleFactor(config, 0.0f);
   //
-  //  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED,
+  //  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED,
   //  DIRECTION_RTL);
   //
-  //  ASSERT_FLOAT_EQ(10.2, get_taitank_node_layout_width(root_child0));
-  //  ASSERT_FLOAT_EQ(10.2, get_taitank_node_layout_height(root_child0));
+  //  ASSERT_FLOAT_EQ(10.2, GetWidth(root_child0));
+  //  ASSERT_FLOAT_EQ(10.2, GetHeight(root_child0));
 
   //  YGConfigSetPointScaleFactor(config, 1.0f);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  ASSERT_FLOAT_EQ(11, get_taitank_node_layout_width(root_child0));
-  ASSERT_FLOAT_EQ(11, get_taitank_node_layout_height(root_child0));
+  ASSERT_FLOAT_EQ(11, GetWidth(root_child0));
+  ASSERT_FLOAT_EQ(11, GetHeight(root_child0));
 
   //  YGConfigSetPointScaleFactor(config, 2.0f);
   //
-  //  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED,
+  //  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED,
   //  DIRECTION_RTL);
   //
-  //  ASSERT_FLOAT_EQ(10.5, get_taitank_node_layout_width(root_child0));
-  //  ASSERT_FLOAT_EQ(10.5, get_taitank_node_layout_height(root_child0));
+  //  ASSERT_FLOAT_EQ(10.5, GetWidth(root_child0));
+  //  ASSERT_FLOAT_EQ(10.5, GetHeight(root_child0));
   //
   //  YGConfigSetPointScaleFactor(config, 4.0f);
   //
-  //  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  //  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
   //
-  //  ASSERT_FLOAT_EQ(10.25, get_taitank_node_layout_width(root_child0));
-  //  ASSERT_FLOAT_EQ(10.25, get_taitank_node_layout_height(root_child0));
+  //  ASSERT_FLOAT_EQ(10.25, GetWidth(root_child0));
+  //  ASSERT_FLOAT_EQ(10.25, GetHeight(root_child0));
   //
   //  YGConfigSetPointScaleFactor(config, 1.0f / 3.0f);
   //
-  //  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED,
+  //  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED,
   //  DIRECTION_RTL);
   //
-  //  ASSERT_FLOAT_EQ(12.0, get_taitank_node_layout_width(root_child0));
-  //  ASSERT_FLOAT_EQ(12.0, get_taitank_node_layout_height(root_child0));
+  //  ASSERT_FLOAT_EQ(12.0, GetWidth(root_child0));
+  //  ASSERT_FLOAT_EQ(12.0, GetHeight(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, rounding_feature_with_custom_measure_func_ceil) {
-  const TaitankNodeRef root = TaitankNodeCreate();
+  const TaitankNodeRef root = NodeCreate();
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_measure_function(root_child0, _measureCeil);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetMeasureFunction(root_child0, _measureCeil);
   //  root_child0->setMeasureFunc(_measureCeil);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  InsertChild(root, root_child0, 0);
 
   //  YGConfigSetPointScaleFactor(config, 1.0f);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  ASSERT_FLOAT_EQ(11, get_taitank_node_layout_width(root_child0));
-  ASSERT_FLOAT_EQ(11, get_taitank_node_layout_height(root_child0));
+  ASSERT_FLOAT_EQ(11, GetWidth(root_child0));
+  ASSERT_FLOAT_EQ(11, GetHeight(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, rounding_feature_with_custom_measure_and_fractial_matching_scale) {
-  const TaitankNodeRef root = TaitankNodeCreate();
+  const TaitankNodeRef root = NodeCreate();
 
-  //  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  //  set_taitank_node_style_position(root_child0, CSS_LEFT, 73.625);
+  //  const TaitankNodeRef root_child0 = NodeCreate();
+  //  SetPosition(root_child0, CSS_LEFT, 73.625);
   //  root_child0->setMeasureFunc(_measureFractial);
-  //  TaitankNodeInsertChild(root, root_child0, 0);
+  //  InsertChild(root, root_child0, 0);
   //
   //  YGConfigSetPointScaleFactor(config, 2.0f);
   //
-  //  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  //  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
   //
-  //  ASSERT_FLOAT_EQ(0.5, get_taitank_node_layout_width(root_child0));
-  //  ASSERT_FLOAT_EQ(0.5, get_taitank_node_layout_height(root_child0));
-  //  ASSERT_FLOAT_EQ(73.5, get_taitank_node_layout_left(root_child0));
+  //  ASSERT_FLOAT_EQ(0.5, GetWidth(root_child0));
+  //  ASSERT_FLOAT_EQ(0.5, GetHeight(root_child0));
+  //  ASSERT_FLOAT_EQ(73.5, GetLeft(root_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }

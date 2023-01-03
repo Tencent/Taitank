@@ -1,14 +1,14 @@
 /*
  *
- * Tencent is pleased to support the open source community by making Taitank available. 
+ * Tencent is pleased to support the open source community by making Taitank available.
  * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http:// www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed in writing, software
  * distributed under the License is distributed on an “AS IS” BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -83,9 +83,9 @@ TaitankStyle::TaitankStyle() {
   line_space_ = 0;
 }
 
-TaitankStyle::~TaitankStyle() {
-  // TODO Auto-generated destructor stub
-}
+// TaitankStyle::~TaitankStyle() {
+//   // TODO Auto-generated destructor stub
+// }
 
 std::string edge2String(int type, CSSValue &edges, CSSFrom &edgesFrom) {
   std::string prefix = "";
@@ -383,19 +383,19 @@ bool setEdges(CSSDirection dir, float value, CSSValue &edges, CSSFrom &edgesFrom
 
 // Allow set value as auto (VALUE_AUTO), is NAN.
 // then margin is calculated in layout follow W3C regulars
-bool TaitankStyle::set_margin(CSSDirection dir, float value) {
+bool TaitankStyle::SetMargin(CSSDirection dir, float value) {
   return setEdges(dir, value, margin_, margin_from_);
 }
 
-bool TaitankStyle::set_padding(CSSDirection dir, float value) {
+bool TaitankStyle::SetPadding(CSSDirection dir, float value) {
   return setEdges(dir, value, padding_, padding_from_);
 }
 
-bool TaitankStyle::set_border(CSSDirection dir, float value) {
+bool TaitankStyle::SetBorder(CSSDirection dir, float value) {
   return setEdges(dir, value, border_, border_from_);
 }
 
-bool TaitankStyle::set_position(CSSDirection dir, float value) {
+bool TaitankStyle::SetPosition(CSSDirection dir, float value) {
   if (dir > CSS_END) {
     return false;
   }
@@ -407,8 +407,8 @@ bool TaitankStyle::set_position(CSSDirection dir, float value) {
   return false;
 }
 
-float TaitankStyle::get_start_position(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(position_[CSS_START])) {
+float TaitankStyle::GetStartPosition(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(position_[CSS_START])) {
     return position_[CSS_START];
   } else if (isDefined(position_[kAxisStart[axis]])) {
     return position_[kAxisStart[axis]];
@@ -416,8 +416,8 @@ float TaitankStyle::get_start_position(FlexDirection axis) {
   return VALUE_AUTO;
 }
 
-float TaitankStyle::get_end_position(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(position_[CSS_END])) {
+float TaitankStyle::GetEndPosition(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(position_[CSS_END])) {
     return position_[CSS_END];
   } else if (isDefined(position_[kAxisEnd[axis]])) {
     return position_[kAxisEnd[axis]];
@@ -425,21 +425,21 @@ float TaitankStyle::get_end_position(FlexDirection axis) {
   return VALUE_AUTO;
 }
 
-void TaitankStyle::set_dim(Dimension dimension, float value) { dim_[dimension] = value; }
+void TaitankStyle::SetDimension(Dimension dimension, float value) { dim_[dimension] = value; }
 
-float TaitankStyle::get_dim(Dimension dimension) { return dim_[dimension]; }
+void TaitankStyle::SetDimension(FlexDirection axis, float value) { SetDimension(kAxisDim[axis], value); }
 
-void TaitankStyle::set_dim(FlexDirection axis, float value) { set_dim(kAxisDim[axis], value); }
+float TaitankStyle::GetDimension(Dimension dimension) { return dim_[dimension]; }
 
-float TaitankStyle::get_dim(FlexDirection axis) { return dim_[kAxisDim[axis]]; }
+float TaitankStyle::GetDimension(FlexDirection axis) { return dim_[kAxisDim[axis]]; }
 
-bool TaitankStyle::is_dimension_auto(FlexDirection axis) {
+bool TaitankStyle::IsDimensionAuto(FlexDirection axis) {
   return isUndefined(dim_[kAxisDim[axis]]);
 }
 
 // axis must be get from resolveMainAxis or resolveCrossAxis in HPNode
-float TaitankStyle::get_start_border(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(border_[CSS_START]) &&
+float TaitankStyle::GetStartBorder(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(border_[CSS_START]) &&
       border_from_[CSS_START] != CSS_NONE) {
     return border_[CSS_START];
   }
@@ -449,8 +449,8 @@ float TaitankStyle::get_start_border(FlexDirection axis) {
   return 0.0f;
 }
 
-float TaitankStyle::get_end_border(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(border_[CSS_END]) && border_from_[CSS_END] != CSS_NONE) {
+float TaitankStyle::GetEndBorder(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(border_[CSS_END]) && border_from_[CSS_END] != CSS_NONE) {
     return border_[CSS_END];
   }
   if (isDefined(border_[kAxisEnd[axis]])) {
@@ -459,8 +459,8 @@ float TaitankStyle::get_end_border(FlexDirection axis) {
   return 0.0f;
 }
 
-float TaitankStyle::get_start_padding(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(padding_[CSS_START]) &&
+float TaitankStyle::GetStartPadding(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(padding_[CSS_START]) &&
       padding_from_[CSS_START] != CSS_NONE) {
     return padding_[CSS_START];
   } else if (isDefined(padding_[kAxisStart[axis]])) {
@@ -469,8 +469,8 @@ float TaitankStyle::get_start_padding(FlexDirection axis) {
   return 0.0f;
 }
 
-float TaitankStyle::get_end_padding(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(padding_[CSS_END]) &&
+float TaitankStyle::GetEndPadding(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(padding_[CSS_END]) &&
       padding_from_[CSS_END] != CSS_NONE) {
     return padding_[CSS_END];
   } else if (isDefined(padding_[kAxisEnd[axis]])) {
@@ -480,8 +480,8 @@ float TaitankStyle::get_end_padding(FlexDirection axis) {
 }
 
 // auto margins are treated as zero
-float TaitankStyle::get_start_margin(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(margin_[CSS_START]) &&
+float TaitankStyle::GetStartMargin(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(margin_[CSS_START]) &&
       margin_from_[CSS_START] != CSS_NONE) {
     return margin_[CSS_START];
   }
@@ -492,8 +492,8 @@ float TaitankStyle::get_start_margin(FlexDirection axis) {
 }
 
 // auto margins are treated as zero
-float TaitankStyle::get_end_margin(FlexDirection axis) {
-  if (is_row_direction(axis) && isDefined(margin_[CSS_END]) && margin_from_[CSS_END] != CSS_NONE) {
+float TaitankStyle::GetEndMargin(FlexDirection axis) {
+  if (IsRowDirection(axis) && isDefined(margin_[CSS_END]) && margin_from_[CSS_END] != CSS_NONE) {
     return margin_[CSS_END];
   }
   if (isDefined(margin_[kAxisEnd[axis]])) {
@@ -502,31 +502,31 @@ float TaitankStyle::get_end_margin(FlexDirection axis) {
   return 0.0f;
 }
 
-float TaitankStyle::get_margin(FlexDirection axis) {
-  return get_start_margin(axis) + get_end_margin(axis);
+float TaitankStyle::GetMargin(FlexDirection axis) {
+  return GetStartMargin(axis) + GetEndMargin(axis);
 }
 
-bool TaitankStyle::is_auto_start_margin(FlexDirection axis) {
-  if (is_row_direction(axis) && margin_from_[CSS_START] != CSS_NONE) {
+bool TaitankStyle::IsAutoStartMargin(FlexDirection axis) {
+  if (IsRowDirection(axis) && margin_from_[CSS_START] != CSS_NONE) {
     return isUndefined(margin_[CSS_START]);
   }
   return isUndefined(margin_[kAxisStart[axis]]);
 }
 
-bool TaitankStyle::is_auto_end_margin(FlexDirection axis) {
-  if (is_row_direction(axis) && margin_from_[CSS_END] != CSS_NONE) {
+bool TaitankStyle::IsAutoEndMargin(FlexDirection axis) {
+  if (IsRowDirection(axis) && margin_from_[CSS_END] != CSS_NONE) {
     return isUndefined(margin_[CSS_END]);
   }
   return isUndefined(margin_[kAxisEnd[axis]]);
 }
 
-bool TaitankStyle::has_auto_margin(FlexDirection axis) {
-  return is_auto_start_margin(axis) || is_auto_end_margin(axis);
+bool TaitankStyle::IsAutoMargin(FlexDirection axis) {
+  return IsAutoStartMargin(axis) || IsAutoEndMargin(axis);
 }
 
-bool TaitankStyle::is_overflow_scroll() { return overflow_type_ == OVERFLOW_SCROLL; }
+bool TaitankStyle::IsOverflowScroll() { return overflow_type_ == OVERFLOW_SCROLL; }
 
-float TaitankStyle::get_flex_basis() {
+float TaitankStyle::GetFlexBasis() {
   if (isDefined(flex_basis_)) {
     return flex_basis_;
   } else if (isDefined(flex_) && flex_ > 0.0f) {

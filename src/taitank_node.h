@@ -1,14 +1,14 @@
 /*
  *
- * Tencent is pleased to support the open source community by making Taitank available. 
+ * Tencent is pleased to support the open source community by making Taitank available.
  * Copyright (C) 2021 THL A29 Limited, a Tencent company.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the “License”);
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *    http:// www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed in writing, software
  * distributed under the License is distributed on an “AS IS” BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,18 +17,20 @@
  *
  */
 
-#ifndef TAITANK_TAITANK_NODE_H_
-#define TAITANK_TAITANK_NODE_H_
+#pragma once
 
 #include <vector>
 
 #include "taitank_cache.h"
+#include "taitank_config.h"
 #include "taitank_flex.h"
 #include "taitank_flexline.h"
 #include "taitank_style.h"
 #include "taitank_util.h"
 
 namespace taitank {
+
+TaitankConfigRef ConfigGetDefault();
 
 class TaitankNode;
 typedef TaitankNode* TaitankNodeRef;
@@ -40,70 +42,72 @@ typedef void (*TaitankDirtiedFunction)(TaitankNodeRef node);
 
 class TaitankNode {
  public:
-  TaitankNode();
+  TaitankNode() : TaitankNode{ConfigGetDefault()} {}
+  TaitankNode(TaitankConfigRef config);
   virtual ~TaitankNode();
   void InitLayoutResult();
   bool Reset();
   void PrintNode(uint32_t indent = 0);
-  TaitankStyle get_style();
-  void set_style(const TaitankStyle& st);
-  bool set_measure_function(TaitankMeasureFunction measure_function);
-  void set_parent(TaitankNodeRef parent_ref);
-  TaitankNodeRef get_parent();
+  TaitankStyle GetStyle() const;
+  void SetStyle(const TaitankStyle& st);
+  bool SetMeasureFunction(TaitankMeasureFunction measure_function);
+  void SetParent(TaitankNodeRef parent_ref);
+  TaitankNodeRef GetParent() const;
   void AddChild(TaitankNodeRef item);
   bool InsertChild(TaitankNodeRef item, uint32_t index);
-  TaitankNodeRef get_child(uint32_t index);
+  TaitankNodeRef GetChild(uint32_t index);
   bool RemoveChild(TaitankNodeRef child);
   bool RemoveChild(uint32_t index);
-  uint32_t child_count();
+  uint32_t ChildCount() const;
 
-  void set_display_type(DisplayType display_type);
-  void set_has_new_layout(bool has_new_layout);
-  bool get_has_new_layout();
-  void markAsDirty();
-  void set_dirty(bool dirty);
-  void set_dirtied_function(TaitankDirtiedFunction dirtied_function);
+  void SetDisplayType(DisplayType display_type);
+  void SetHasNewLayout(bool has_new_layout);
+  bool GetHasNewLayout();
+  void MarkAsDirty();
+  void SetDirty(bool dirty);
+  void SetDirtiedFunction(TaitankDirtiedFunction dirtied_function);
 
-  void set_context(void* context);
-  void* get_context();
+  void SetContext(void* context);
+  void* GetContext();
 
-  float get_start_border(FlexDirection axis);
-  float get_end_border(FlexDirection axis);
-  float get_start_padding_and_border(FlexDirection axis);
-  float get_end_padding_and_border(FlexDirection axis);
-  float get_padding_and_border(FlexDirection axis);
-  float get_margin(FlexDirection axis);
-  float get_start_margin(FlexDirection axis);
-  float get_end_margin(FlexDirection axis);
-  bool is_auto_start_margin(FlexDirection axis);
-  bool is_auto_end_margin(FlexDirection axis);
+  float GetStartBorder(FlexDirection axis);
+  float GetEndBorder(FlexDirection axis);
+  float GetStartPaddingAndBorder(FlexDirection axis);
+  float GetEndPaddingAndBorder(FlexDirection axis);
+  float GetPaddingAndBorder(FlexDirection axis);
+  float GetMargin(FlexDirection axis);
+  float GetStartMargin(FlexDirection axis);
+  float GetEndMargin(FlexDirection axis);
+  bool IsAutoStartMargin(FlexDirection axis);
+  bool IsAutoEndMargin(FlexDirection axis);
 
-  void set_layout_start_margin(FlexDirection axis, float value);
-  void set_layout_end_margin(FlexDirection axis, float value);
-  float get_layout_margin(FlexDirection axis);
-  float get_layout_start_margin(FlexDirection axis);
-  float get_layout_end_margin(FlexDirection axis);
+  void SetLayoutStartMargin(FlexDirection axis, float value);
+  void SetLayoutEndMargin(FlexDirection axis, float value);
+  float GetLayoutMargin(FlexDirection axis);
+  float GetLayoutStartMargin(FlexDirection axis);
+  float GetLayoutEndMargin(FlexDirection axis);
 
   float ResolveRelativePosition(FlexDirection axis, bool for_axis_start);
-  void set_layout_start_position(FlexDirection axis, float value,
-                                 bool add_relative_position = true);
-  void set_layout_end_position(FlexDirection axis, float value, bool add_relative_position = true);
-  float get_layout_start_position(FlexDirection axis);
-  float get_layout_end_position(FlexDirection axis);
+  void SetLayoutStartPosition(FlexDirection axis, float value, bool add_relative_position = true);
+  void SetLayoutEndPosition(FlexDirection axis, float value, bool add_relative_position = true);
+  float GetLayoutStartPosition(FlexDirection axis);
+  float GetLayoutEndPosition(FlexDirection axis);
 
   // FlexDirection resolveMainAxis(HPDirection direction);
   FlexDirection ResolveMainAxis();
   FlexDirection ResolveCrossAxis();
-  float get_bound_axis(FlexDirection axis, float value);
-  void layout(float parent_width, float parent_height,
+  float GetBoundAxis(FlexDirection axis, float value);
+  void Layout(float parent_width, float parent_height, TaitankConfigRef config,
               TaitankDirection parent_direction = DIRECTION_LTR, void* layout_context = nullptr);
-  float get_main_axis_dim();
-  float get_layout_dim(FlexDirection axis);
-  bool is_layout_dim_defined(FlexDirection axis);
-  void set_layout_dim(FlexDirection axis, float value);
-  void set_layout_direction(TaitankDirection direction);
-  TaitankDirection get_layout_direction();
-  FlexAlign get_node_align(TaitankNodeRef item);
+  float GetMainAxisDimension();
+  float GetLayoutDimension(FlexDirection axis);
+  bool IsLayoutDimensionDefined(FlexDirection axis);
+  void SetLayoutDimension(FlexDirection axis, float value);
+  void SetLayoutDirection(TaitankDirection direction);
+  TaitankDirection GetLayoutDirection();
+  FlexAlign GetNodeAlign(TaitankNodeRef item);
+  void SetConfig(TaitankConfigRef config);
+  TaitankConfigRef GetConfig() const;
 
  protected:
   TaitankDirection ResolveDirection(TaitankDirection parentDirection);
@@ -127,31 +131,31 @@ class TaitankNode {
   void LayoutFixedItems(TaitankSizeMode measureMode, void* layoutContext);
   void CalculateFixedItemPosition(TaitankNodeRef item, FlexDirection axis);
 
-  void ConvertLayoutResult(float absLeft, float absTop);
+  void ConvertLayoutResult(float absLeft, float absTop, float scaleFactor);
 
  public:
   TaitankStyle style_;
-  TaitankLayout layout_result_;
+  TaitankLayout layout_result_{};
 
   void* context_;
   std::vector<TaitankNodeRef> children_;
   TaitankNodeRef parent_;
   TaitankMeasureFunction measure_;
 
-  bool is_frozen_;
-  bool is_dirty_;
-  bool has_new_layout_;
+  bool is_frozen_{};
+  bool is_dirty_{};
+  bool has_new_layout_{};
   TaitankDirtiedFunction dirtied_function_;
 
   // cache layout or measure positions, used if conditions are met
   TaitankLayoutCache layout_cache_;
   // layout result is in initial state or not
   bool in_initail_state_;
+  TaitankConfigRef config_ = nullptr;
+
 #ifdef LAYOUT_TIME_ANALYZE
   int fetchCount;
 #endif
 };
 
 }  // namespace taitank
-
-#endif  // TAITANK_TAITANK_NODE_H_

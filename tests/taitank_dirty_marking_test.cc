@@ -24,151 +24,151 @@
 using namespace taitank;
 
 TEST(TAITANK_TEST, dirty_propagation) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child0, 50);
-  set_taitank_node_style_height(root_child0, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetWidth(root_child0, 50);
+  SetHeight(root_child0, 20);
+  InsertChild(root, root_child0, 0);
 
-  const TaitankNodeRef root_child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child1, 50);
-  set_taitank_node_style_height(root_child1, 20);
-  TaitankNodeInsertChild(root, root_child1, 1);
+  const TaitankNodeRef root_child1 = NodeCreate();
+  SetWidth(root_child1, 50);
+  SetHeight(root_child1, 20);
+  InsertChild(root, root_child1, 1);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  set_taitank_node_style_width(root_child0, 20);
+  SetWidth(root_child0, 20);
 
   EXPECT_TRUE(root_child0->is_dirty_);
   EXPECT_FALSE(root_child1->is_dirty_);
   EXPECT_TRUE(root->is_dirty_);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   EXPECT_FALSE(root_child0->is_dirty_);
   EXPECT_FALSE(root_child1->is_dirty_);
   EXPECT_FALSE(root->is_dirty_);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, dirty_propagation_only_if_prop_changed) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 100);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 100);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef root_child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child0, 50);
-  set_taitank_node_style_height(root_child0, 20);
-  TaitankNodeInsertChild(root, root_child0, 0);
+  const TaitankNodeRef root_child0 = NodeCreate();
+  SetWidth(root_child0, 50);
+  SetHeight(root_child0, 20);
+  InsertChild(root, root_child0, 0);
 
-  const TaitankNodeRef root_child1 = TaitankNodeCreate();
-  set_taitank_node_style_width(root_child1, 50);
-  set_taitank_node_style_height(root_child1, 20);
-  TaitankNodeInsertChild(root, root_child1, 1);
+  const TaitankNodeRef root_child1 = NodeCreate();
+  SetWidth(root_child1, 50);
+  SetHeight(root_child1, 20);
+  InsertChild(root, root_child1, 1);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  set_taitank_node_style_width(root_child0, 50);
+  SetWidth(root_child0, 50);
 
   EXPECT_FALSE(root_child0->is_dirty_);
   EXPECT_FALSE(root_child1->is_dirty_);
   EXPECT_FALSE(root->is_dirty_);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, dirty_mark_all_children_as_dirty_when_display_changes) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_flex_direction(root, FLEX_DIRECTION_ROW);
-  set_taitank_node_style_height(root, 100);
+  const TaitankNodeRef root = NodeCreate();
+  SetFlexDirection(root, FLEX_DIRECTION_ROW);
+  SetHeight(root, 100);
 
-  const TaitankNodeRef child0 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(child0, 1);
-  const TaitankNodeRef child1 = TaitankNodeCreate();
-  set_taitank_node_style_flex_grow(child1, 1);
+  const TaitankNodeRef child0 = NodeCreate();
+  SetFlexGrow(child0, 1);
+  const TaitankNodeRef child1 = NodeCreate();
+  SetFlexGrow(child1, 1);
 
-  const TaitankNodeRef child1_child0 = TaitankNodeCreate();
-  const TaitankNodeRef child1_child0_child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(child1_child0_child0, 8);
-  set_taitank_node_style_height(child1_child0_child0, 16);
+  const TaitankNodeRef child1_child0 = NodeCreate();
+  const TaitankNodeRef child1_child0_child0 = NodeCreate();
+  SetWidth(child1_child0_child0, 8);
+  SetHeight(child1_child0_child0, 16);
 
-  TaitankNodeInsertChild(child1_child0, child1_child0_child0, 0);
+  InsertChild(child1_child0, child1_child0_child0, 0);
 
-  TaitankNodeInsertChild(child1, child1_child0, 0);
-  TaitankNodeInsertChild(root, child0, 0);
-  TaitankNodeInsertChild(root, child1, 0);
+  InsertChild(child1, child1_child0, 0);
+  InsertChild(root, child0, 0);
+  InsertChild(root, child1, 0);
 
-  set_taitank_node_style_display(child0, DISPLAY_TYPE_FLEX);
-  set_taitank_node_style_display(child1, DISPLAY_TYPE_NONE);
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_width(child1_child0_child0));
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_height(child1_child0_child0));
+  SetDisplay(child0, DISPLAY_TYPE_FLEX);
+  SetDisplay(child1, DISPLAY_TYPE_NONE);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(0, GetWidth(child1_child0_child0));
+  ASSERT_FLOAT_EQ(0, GetHeight(child1_child0_child0));
 
-  set_taitank_node_style_display(child0, DISPLAY_TYPE_NONE);
-  set_taitank_node_style_display(child1, DISPLAY_TYPE_FLEX);
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(8, get_taitank_node_layout_width(child1_child0_child0));
-  ASSERT_FLOAT_EQ(16, get_taitank_node_layout_height(child1_child0_child0));
+  SetDisplay(child0, DISPLAY_TYPE_NONE);
+  SetDisplay(child1, DISPLAY_TYPE_FLEX);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(8, GetWidth(child1_child0_child0));
+  ASSERT_FLOAT_EQ(16, GetHeight(child1_child0_child0));
 
-  set_taitank_node_style_display(child0, DISPLAY_TYPE_FLEX);
-  set_taitank_node_style_display(child1, DISPLAY_TYPE_NONE);
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_width(child1_child0_child0));
-  ASSERT_FLOAT_EQ(0, get_taitank_node_layout_height(child1_child0_child0));
+  SetDisplay(child0, DISPLAY_TYPE_FLEX);
+  SetDisplay(child1, DISPLAY_TYPE_NONE);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(0, GetWidth(child1_child0_child0));
+  ASSERT_FLOAT_EQ(0, GetHeight(child1_child0_child0));
 
-  set_taitank_node_style_display(child0, DISPLAY_TYPE_NONE);
-  set_taitank_node_style_display(child1, DISPLAY_TYPE_FLEX);
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-  ASSERT_FLOAT_EQ(8, get_taitank_node_layout_width(child1_child0_child0));
-  ASSERT_FLOAT_EQ(16, get_taitank_node_layout_height(child1_child0_child0));
+  SetDisplay(child0, DISPLAY_TYPE_NONE);
+  SetDisplay(child1, DISPLAY_TYPE_FLEX);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  ASSERT_FLOAT_EQ(8, GetWidth(child1_child0_child0));
+  ASSERT_FLOAT_EQ(16, GetHeight(child1_child0_child0));
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, dirty_node_only_if_children_are_actually_removed) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_align_items(root, FLEX_ALIGN_START);
-  set_taitank_node_style_width(root, 50);
-  set_taitank_node_style_height(root, 50);
+  const TaitankNodeRef root = NodeCreate();
+  SetAlignItems(root, FLEX_ALIGN_START);
+  SetWidth(root, 50);
+  SetHeight(root, 50);
 
-  const TaitankNodeRef child0 = TaitankNodeCreate();
-  set_taitank_node_style_width(child0, 50);
-  set_taitank_node_style_height(child0, 25);
-  TaitankNodeInsertChild(root, child0, 0);
+  const TaitankNodeRef child0 = NodeCreate();
+  SetWidth(child0, 50);
+  SetHeight(child0, 25);
+  InsertChild(root, child0, 0);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
-  const TaitankNodeRef child1 = TaitankNodeCreate();
-  TaitankNodeRemoveChild(root, child1);
+  const TaitankNodeRef child1 = NodeCreate();
+  RemoveChild(root, child1);
   EXPECT_FALSE(root->is_dirty_);
-  TaitankNodeFree(child1);
+  NodeFree(child1);
 
-  TaitankNodeRemoveChild(root, child0);
+  RemoveChild(root, child0);
   EXPECT_TRUE(root->is_dirty_);
-  TaitankNodeFree(child0);
+  NodeFree(child0);
 
-  TaitankNodeFreeRecursive(root);
+  NodeFreeRecursive(root);
 }
 
 TEST(TAITANK_TEST, dirty_node_only_if_undefined_values_gets_set_to_undefined) {
-  const TaitankNodeRef root = TaitankNodeCreate();
-  set_taitank_node_style_width(root, 50);
-  set_taitank_node_style_height(root, 50);
-  set_taitank_node_style_min_width(root, VALUE_UNDEFINED);
+  const TaitankNodeRef root = NodeCreate();
+  SetWidth(root, 50);
+  SetHeight(root, 50);
+  SetMinWidth(root, VALUE_UNDEFINED);
 
-  TaitankNodeDoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
-
-  EXPECT_FALSE(root->is_dirty_);
-
-  set_taitank_node_style_min_width(root, VALUE_UNDEFINED);
+  DoLayout(root, VALUE_UNDEFINED, VALUE_UNDEFINED);
 
   EXPECT_FALSE(root->is_dirty_);
 
-  TaitankNodeFreeRecursive(root);
+  SetMinWidth(root, VALUE_UNDEFINED);
+
+  EXPECT_FALSE(root->is_dirty_);
+
+  NodeFreeRecursive(root);
 }
