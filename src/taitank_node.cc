@@ -226,7 +226,7 @@ bool TaitankNode::RemoveChild(uint32_t index) {
   return true;
 }
 
-uint32_t TaitankNode::ChildCount() const { return children_.size(); }
+uint32_t TaitankNode::ChildCount() const { return static_cast<uint32_t>(children_.size()); }
 
 void TaitankNode::SetDisplayType(DisplayType display_type) {
   if (style_.display_type_ == display_type) return;
