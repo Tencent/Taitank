@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
     puts 'taitank.podspec read begins'
     s.name             = 'taitank'
-    s.version          = '1.0.1'
+    s.version          = '1.0.2'
     s.summary          = 'Taitank Cross Platform Layout'
   
   # This description is used to generate tags and improve search results.
