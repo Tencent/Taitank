@@ -30,10 +30,7 @@
 
 #include "taitank_flex.h"
 
-// #define __DEBUG__
-// #define LAYOUT_TIME_ANALYZE
 #define ASSERT(e) (assert(e))
-#define nullptr (NULL)
 #define VALUE_AUTO (NAN)
 #define VALUE_UNDEFINED (NAN)
 #define isUndefined(n) (std::isnan(n))
