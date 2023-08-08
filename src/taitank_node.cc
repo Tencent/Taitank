@@ -903,7 +903,7 @@ void TaitankNode::LayoutImpl(float parent_width, float parent_height,
   TaitankSizeMode measureMode = {widthMeasureMode, heightMeasureMode};
   MeasureResult* cacheResult = layout_cache_.GetCachedMeasureResult(
       availableSize, measureMode, layout_action, measure_ != nullptr);
-  if (cacheResult != nullptr && layout_action != LAYOUT_ACTION_LAYOUT) {
+  if (cacheResult != nullptr) {
     // set Result....
     switch (layout_action) {
       case LAYOUT_ACTION_MEASURE_WIDTH:
