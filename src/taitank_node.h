@@ -108,11 +108,11 @@ class TaitankNode {
   FlexAlign GetNodeAlign(TaitankNodeRef item);
   void SetConfig(TaitankConfigRef config);
   TaitankConfigRef GetConfig() const;
+  void ResetLayoutRecursive(bool is_display_none = true);
 
  protected:
   TaitankDirection ResolveDirection(TaitankDirection parentDirection);
   void ResolveStyleValues();
-  void ResetLayoutRecursive(bool is_display_none = true);
   void CacheLayoutOrMeasureResult(TaitankSize available_size, TaitankSizeMode measure_mode,
                                   FlexLayoutAction layout_action);
   void LayoutSingleNode(float available_width, MeasureMode width_measure_mode,
