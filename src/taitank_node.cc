@@ -901,8 +901,21 @@ void TaitankNode::LayoutImpl(float parent_width, float parent_height,
 
   TaitankSize availableSize = {availableWidth, availableHeight};
   TaitankSizeMode measureMode = {widthMeasureMode, heightMeasureMode};
-  MeasureResult* cacheResult = layout_cache_.GetCachedMeasureResult(
-      availableSize, measureMode, layout_action, measure_ != nullptr);
+  // 含弹性子节点的容器在 LAYOUT 阶段不能直接复用缓存：命中缓存会跳过子节点重排，
+  // 而此前的 measure 阶段可能已按内容尺寸把弹性子节点写成中间结果（issue #23）。
+  // 无弹性子节点的容器不受影响，缓存照常命中。
+  bool hasFlexibleChild = false;
+  if (layout_action == LAYOUT_ACTION_LAYOUT && !children_.empty()) {
+    for (size_t i = 0; i < children_.size(); i++) {
+      if (children_[i]->style_.flex_grow_ > 0 || children_[i]->style_.flex_shrink_ > 0) {
+        hasFlexibleChild = true;
+        break;
+      }
+    }
+  }
+  MeasureResult* cacheResult = hasFlexibleChild
+      ? nullptr
+      : layout_cache_.GetCachedMeasureResult(availableSize, measureMode, layout_action, measure_ != nullptr);
   if (cacheResult != nullptr) {
     // set Result....
     switch (layout_action) {
